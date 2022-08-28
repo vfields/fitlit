@@ -15,3 +15,32 @@ console.log('This is the JavaScript entry file - your code begins here.');
 import userData from './data/users';
 
 import UserRepository from './UserRepository';
+
+const userFirstName = document.querySelector(".user-first-name");
+const userAddress = document.querySelector(".user-address");
+const userEmail = document.querySelector(".user-email");
+const userStepGoal = document.querySelector(".user-step-goal");
+const repoStepGoal = document.querySelector(".repo-step-goal");
+const userStrideLength = document.querySelector(".user-stride-length");
+const userFriends = document.querySelector(".friend-names");
+
+const getRandomUser = (user) => {
+    let randomUser = Math.floor(Math.random() * user.length);
+    return user[randomUser];
+}
+const randomUser = getRandomUser(userData);
+
+const displayUserData = () => {
+    userFirstName.innerText = randomUser.name;
+    userAddress.innerText = randomUser.address;
+    userEmail.innerText = randomUser.email; 
+}
+displayUserData();
+
+const averageSteps = () => {
+    userStepGoal.innerText = randomUser.dailyStepGoal;
+    let usersRepo = new UserRepository(userData);
+    repoStepGoal.innerText = usersRepo.calculateAvgStepGoal();
+    userStrideLength.innerText = randomUser.strideLength
+}
+averageSteps();

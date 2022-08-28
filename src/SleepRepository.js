@@ -1,10 +1,10 @@
-import Sleep from '../src/Sleep'
+import Sleep from '../src/Sleep';
 
 class SleepRepository{
-  constructor(data){
-    this.sleep = data.map(data => new Sleep(data))   
+  constructor(data) {
+    this.sleep = data;  
 
   }
 }
 
-export default SleepRepository
+export default SleepRepository;
