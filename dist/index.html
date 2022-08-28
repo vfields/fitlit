@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US" dir="ltr">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fitlit</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
   </head>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-    <p> and I can edit here in real time? </p>
-    <p> Yep, very cool. </p>
+    <header>
+      <h1>Activity Tracker</h1>
+      <p>Hello, <span class="user-first-name">USERNAME</span></p>
+      <span class="user-address">USERADDRESS</span>
+      <span class="user-email">USEREMAIL</span>
+    </header>
+    <section class="friends-section">
+      <h2>Friends List</h2>
+      <article class="friend-names">
+      </article>
+    </section>
+    <section class="water-section">
+      <h3>Water Intake: <span class="water-timeframe">TIMEFRAME</span></h3>
+      <article class="water-information">
+        <p><span class="date">DATE</span> : <span class="water-amount">AMOUNT</span> oz</p>
+      </article>
+      <p>Average Daily Water Intake: <span class="avg-water-amount">AVG</span> oz</p>
+      <button class="change-water-timeframe">
+        Show <span class="water-timeframe">TIMEFRAME</span>
+      </button>
+    </section>
+    <section class="sleep-section">
+      <h3>Sleep: <span class="sleep-timeframe">TIMEFRAME</span></h3>
+      <article class="sleep-information">
+        <p><span class="date">DATE</span> : <span class="sleep-amount">AMOUNT</span> hrs</p>
+      </article>
+      <p>Average Daily Sleep: <span class="avg-sleep-amount">AVG</span> hrs</p>
+      <button class="change-sleep-timeframe">
+        Show <span class="sleep-timeframe">TIMEFRAME</span>
+      </button>
+    </section>
+    <section class="steps-section">
+      <h3>Step Goals</h3>
+      <p>Daily Step Goal: <span class="user-step-goal">USERSTEPS</span> steps</p>
+      <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal">REPOAVGSTEPS</span> steps</p>
+      <p>Stride Length: <span class="user-stride-length">USERSTRIDE</span> ft</p>
+    </section>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
   </body>

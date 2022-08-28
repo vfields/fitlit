@@ -1,5 +1,72 @@
+/* COLORS ********************************************** */
+
+/*
+Hardcoded vs Dynamic (user data) { }
+
+Primary vs Secondary { }
+*/
+
+header,
+section {
+  background-color: white;
+}
+
 body, html {
   background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   background-repeat: no-repeat;
   height: 100%;
+}
+
+span {
+  color: red;
+}
+
+button {
+  color: white;
+  background-color: red;
+}
+
+/* FONTS *********************************************** */
+ 
+/* 
+h1-h6 { }
+
+p { }
+
+Hardcoded vs. Dynamic { }
+*/
+
+/* BODY ************************************************ */
+
+body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 10px;
+}
+
+header {
+  grid-column: span 2;
+}
+
+.friends-section {
+  grid-row: span 3;
+}
+
+.steps-section {
+  grid-column: span 2;
+}
+
+/* SHARED WIDGET PROPERTIES **************************** */
+
+header,
+section {
+  padding: 10px;
+  border-radius: 10px;
+  filter: drop-shadow(7px 5px 2px #212121);
+}
+
+button {
+  border: 0px;
+  border-radius: 5px;
 }
