@@ -6,10 +6,6 @@ Hardcoded vs Dynamic (user data) { }
 Primary vs Secondary { }
 */
 
-span {
-  color: red;
-}
-
 header,
 section {
   background-color: white;
@@ -19,6 +15,15 @@ body, html {
   background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   background-repeat: no-repeat;
   height: 100%;
+}
+
+span {
+  color: red;
+}
+
+button {
+  color: white;
+  background-color: red;
 }
 
 /* FONTS *********************************************** */
@@ -60,4 +65,7 @@ section {
   border-radius: 10px;
 }
 
-
+button {
+  border: 0px;
+  border-radius: 5px;
+}
