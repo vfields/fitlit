@@ -37,4 +37,10 @@ const displayUserData = () => {
 }
 displayUserData();
 
-
+const averageSteps = () => {
+    userStepGoal.innerText = randomUser.dailyStepGoal;
+    let usersRepo = new UserRepository(userData);
+    repoStepGoal.innerText = usersRepo.calculateAvgStepGoal();
+    userStrideLength.innerText = randomUser.strideLength
+}
+averageSteps();
