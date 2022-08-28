@@ -3,6 +3,8 @@ class Sleep{
     this.userId = sleepData.userId
     this.date = sleepdata.dailyStepGoal
     this.hoursSlept = sleepData.hoursSlept
-    this.sleepQuality = sleepData.sleepQuality 
+    this.sleepQuality = sleepData.sleepQuality
   }
 }
+
+export default Sleep;
