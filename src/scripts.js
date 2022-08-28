@@ -19,6 +19,10 @@ import UserRepository from './UserRepository';
 const userFirstName = document.querySelector(".user-first-name");
 const userAddress = document.querySelector(".user-address");
 const userEmail = document.querySelector(".user-email");
+const userStepGoal = document.querySelector(".user-step-goal");
+const repoStepGoal = document.querySelector(".repo-step-goal");
+const userStrideLength = document.querySelector(".user-stride-length");
+const userFriends = document.querySelector(".friend-names");
 
 const getRandomUser = (user) => {
     let randomUser = Math.floor(Math.random() * user.length);
@@ -27,15 +31,10 @@ const getRandomUser = (user) => {
 const randomUser = getRandomUser(userData);
 
 const displayUserData = () => {
-userFirstName.innerText = randomUser.name;
-userAddress.innerText = randomUser.address;
-userEmail.innerText = randomUser.email; 
+    userFirstName.innerText = randomUser.name;
+    userAddress.innerText = randomUser.address;
+    userEmail.innerText = randomUser.email; 
 }
+displayUserData();
 
-displayUserData()
-// function getRandomData (){
-//     //  randomUser = Math.floor(Math.random()* userData.length)
-//     console.log('I AM WORKING') 
-// }
-// getRandomData()
 
