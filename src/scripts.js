@@ -17,13 +17,22 @@ import userData from './data/users';
 import UserRepository from './UserRepository';
 
 const userFirstName = document.querySelector(".user-first-name");
+const userAddress = document.querySelector(".user-address");
+const userEmail = document.querySelector(".user-email");
 
 const getRandomUser = (user) => {
     let randomUser = Math.floor(Math.random() * user.length);
-    console.log(user[randomUser]);
+    return user[randomUser];
 }
-getRandomUser(userData);
+const randomUser = getRandomUser(userData);
 
+const displayUserData = () => {
+userFirstName.innerText = randomUser.name;
+userAddress.innerText = randomUser.address;
+userEmail.innerText = randomUser.email; 
+}
+
+displayUserData()
 // function getRandomData (){
 //     //  randomUser = Math.floor(Math.random()* userData.length)
 //     console.log('I AM WORKING') 
