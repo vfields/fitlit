@@ -10,15 +10,15 @@
     <header>
       <h1>Activity Tracker</h1>
       <p>Hello, <span class="user-first-name">USERNAME</span></p>
-      <p class="user-address">USERADDRESS</p>
-      <p class="user-email">USEREMAIL</p>
+      <span class="user-address">USERADDRESS</span>
+      <span class="user-email">USEREMAIL</span>
     </header>
-    <section>
+    <section class="friends-section">
       <h2>Friends List</h2>
       <article class="friend-names">
       </article>
     </section>
-    <section>
+    <section class="water-section">
       <h3>Water Intake: <span class="water-timeframe">TIMEFRAME</span></h3>
       <article class="water-information">
         <p><span class="date">DATE</span> : <span class="water-amount">AMOUNT</span> oz</p>
@@ -28,7 +28,7 @@
         Show <span class="water-timeframe">TIMEFRAME</span>
       </button>
     </section>
-    <section>
+    <section class="sleep-section">
       <h3>Sleep: <span class="sleep-timeframe">TIMEFRAME</span></h3>
       <article class="sleep-information">
         <p><span class="date">DATE</span> : <span class="sleep-amount">AMOUNT</span> hrs</p>
@@ -38,11 +38,11 @@
         Show <span class="sleep-timeframe">TIMEFRAME</span>
       </button>
     </section>
-    <section>
+    <section class="steps-section">
       <h3>Step Goals</h3>
-      <p>Daily Step Goal: <span class="user-step-goal"></span></p>
-      <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal"></span></p>
-      <p>Stride Length: <span class="user-stride-length"></span></p>
+      <p>Daily Step Goal: <span class="user-step-goal">USERSTEPS</span> steps</p>
+      <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal">REPOAVGSTEPS</span> steps</p>
+      <p>Stride Length: <span class="user-stride-length">USERSTRIDE</span> ft</p>
     </section>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
