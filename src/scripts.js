@@ -15,3 +15,18 @@ console.log('This is the JavaScript entry file - your code begins here.');
 import userData from './data/users';
 
 import UserRepository from './UserRepository';
+
+const userFirstName = document.querySelector(".user-first-name");
+
+const getRandomUser = (user) => {
+    let randomUser = Math.floor(Math.random() * user.length);
+    console.log(user[randomUser]);
+}
+getRandomUser(userData);
+
+// function getRandomData (){
+//     //  randomUser = Math.floor(Math.random()* userData.length)
+//     console.log('I AM WORKING') 
+// }
+// getRandomData()
+
