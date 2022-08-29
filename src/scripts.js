@@ -13,6 +13,7 @@ import User from './User';
 var userRepository;
 var randomUser;
 var hydrationRepository;
+var timeframe;
 
 // FETCH DATA *****************************************************
 const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
@@ -29,6 +30,7 @@ function setData(repos) {
     randomUser = getRandomUser(userRepository.data);
     hydrationRepository = new Repository(repos[1].hydrationData);
     randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
+    timeframe = randomUser.hydrationData[0].date; // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
 
     displayUserData();
 }
@@ -48,7 +50,11 @@ const userStepGoal = document.querySelector(".user-step-goal");
 const repoStepGoal = document.querySelector(".repo-step-goal");
 const userStrideLength = document.querySelector(".user-stride-length");
 const userFriends = document.querySelector(".friend-names");
+const timeframeDisplay = document.querySelector(".timeframe-display");
+const timeframeButtonText = document.querySelector(".timeframe-button-text");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
+const waterDate = document.querySelector(".water-date");
+const waterAmount = document.querySelector(".water-amount");
 
 // EVENT LISTENERS ************************************************
 
@@ -73,4 +79,18 @@ function displayStepData() {
 
 function displayHydrationData() {
     avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+    setTimeframeDisplays();
+}
+
+function setTimeframeDisplays() {
+    // Conditional, timeframeDisplay, and avgWaterAmount needs to be updated when timeframe assigned to the correct date
+    if (timeframe === randomUser.hydrationData[0].date) {
+        timeframeDisplay.innerText = randomUser.hydrationData[0].date;
+        timeframeButtonText.innerText = "WEEKLY";
+        waterDate.innerText = timeframe;
+        waterAmount.innerText = randomUser.hydrationData[0].numOunces;
+    } else {
+        timeframeButtonText.innerText = "TODAY'S";
+        // Need to create multiple entries for weekly data
+    }
 }

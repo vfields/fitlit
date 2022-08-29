@@ -23,7 +23,7 @@ span {
 
 button {
   color: white;
-  background-color: red;
+  background-color: pink;
 }
 
 /* FONTS *********************************************** */
@@ -36,7 +36,7 @@ p { }
 Hardcoded vs. Dynamic { }
 */
 
-/* BODY ************************************************ */
+/* BODY LAYOUT **************************************** */
 
 body {
   display: grid;
@@ -50,7 +50,11 @@ header {
 }
 
 .friends-section {
-  grid-row: span 3;
+  grid-row: span 4;
+}
+
+.controls-section {
+  grid-column: span 2;
 }
 
 .steps-section {
@@ -60,13 +64,9 @@ header {
 /* SHARED WIDGET PROPERTIES **************************** */
 
 header,
-section {
+section,
+button {
   padding: 10px;
   border-radius: 10px;
   filter: drop-shadow(7px 5px 2px #212121);
-}
-
-button {
-  border: 0px;
-  border-radius: 5px;
 }
