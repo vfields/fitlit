@@ -4,13 +4,10 @@ class UserHydration {
   }
 
   avgHydration() {
-    return this.userData.reduce((acc, curr, index, dataArray) => {
-      if (index === dataArray -1) {
-        return (acc + curr) / dataArray.length;
-      }
+    return Math.floor(this.userData.reduce((acc, curr, index, dataArray) => {
       acc += curr.numOunces;
       return acc;
-    }, 0);
+    }, 0) / this.userData.length);
   }
 
   findHydrationByDate(date) {

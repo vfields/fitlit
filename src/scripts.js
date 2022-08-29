@@ -7,13 +7,13 @@ import './images/turing-logo.png';
 // import userData from './data/users';
 import fetchData from './apiCalls';
 import UserRepository from './UserRepository';
-// import HydrationRepository from './HydrationRepository';
+import HydrationRepository from './HydrationRepo';
 // import SleepRepository from './SleepRepository';
 
 // GLOBAL DATA ***************************************************
 var userRepository;
 var randomUser;
-// var hydrationRepository;
+var hydrationRepository;
 // var sleepRepository;
 
 // FETCH DATA *****************************************************
@@ -29,7 +29,7 @@ Promise.all([usersPromise, hydrationPromise, sleepPromise])
 
 function setData(repos) {
     userRepository = new UserRepository(repos[0].userData);
-    // hydrationRepository = new HydrationRepository(repos[1].hydrationData);
+    hydrationRepository = new HydrationRepository(repos[1].hydrationData);
     // sleepRepository = new SleepRepository(repos[2].sleepData);
     randomUser = getRandomUser(userRepository.data);
     displayUserData();
@@ -48,13 +48,15 @@ const userStepGoal = document.querySelector(".user-step-goal");
 const repoStepGoal = document.querySelector(".repo-step-goal");
 const userStrideLength = document.querySelector(".user-stride-length");
 const userFriends = document.querySelector(".friend-names");
+const avgWaterAmount = document.querySelector(".avg-water-amount");
 
 // EVENT LISTENERS ************************************************
 
 // EVENT HANDLERS *************************************************
 function displayUserData() {
     displayUserInfo();
-    displayAvgSteps();
+    displayStepData();
+    displayHydrationData();
 }
 
 function displayUserInfo() {
@@ -63,8 +65,13 @@ function displayUserInfo() {
     userEmail.innerText = randomUser.email; 
 }
 
-function displayAvgSteps() {
+function displayStepData() {
     userStepGoal.innerText = randomUser.dailyStepGoal;
     repoStepGoal.innerText = userRepository.calculateAvgStepGoal();
     userStrideLength.innerText = randomUser.strideLength;
+}
+
+function displayHydrationData() {
+    const userHydrationData = hydrationRepository.findUser(randomUser.id);
+    avgWaterAmount.innerText = userHydrationData.avgHydration();
 }

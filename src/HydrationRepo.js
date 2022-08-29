@@ -1,10 +1,11 @@
+import UserHydration from './UserHydration'
 class HydrationRepository {
   constructor(data) {
-    this.hydration = data;
+    this.data = data;
   }
 
-  findUserHydration(id) {
-    const userData = this.hydration.filter(entry => entry.id === id);
+  findUser(id) {
+    const userData = this.data.filter(entry => entry.userID === id);
     return new UserHydration(userData);
   }
 }
