@@ -1,27 +1,26 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
+// Add methods from user sleep and hydration class to User class and call the findUser methods in the SleepRepo and HydrationRepo in order the set the properties of sleepData and hydrationData in the User class
+
 // DEPENDENCIES **************************************************
 import './css/styles.css';
 import './images/turing-logo.png';
 // import userData from './data/users';
 import fetchData from './apiCalls';
 import UserRepository from './UserRepository';
-import HydrationRepository from './HydrationRepo';
-// import SleepRepository from './SleepRepository';
+import HydrationRepository from './HydrationRepository';
 
 // GLOBAL DATA ***************************************************
 var userRepository;
 var randomUser;
 var hydrationRepository;
-// var sleepRepository;
 
 // FETCH DATA *****************************************************
 const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
 const hydrationPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/hydration');
-const sleepPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/sleep');
 
-Promise.all([usersPromise, hydrationPromise, sleepPromise])
+Promise.all([usersPromise, hydrationPromise])
     .then((repos) => {
         console.log(repos);
         setData(repos);
@@ -29,9 +28,10 @@ Promise.all([usersPromise, hydrationPromise, sleepPromise])
 
 function setData(repos) {
     userRepository = new UserRepository(repos[0].userData);
-    hydrationRepository = new HydrationRepository(repos[1].hydrationData);
-    // sleepRepository = new SleepRepository(repos[2].sleepData);
     randomUser = getRandomUser(userRepository.data);
+    hydrationRepository = new HydrationRepository(repos[1].hydrationData);
+    randomUser.setUserData(hydrationRepository, 'hydrationData');
+
     displayUserData();
 }
 
@@ -72,6 +72,5 @@ function displayStepData() {
 }
 
 function displayHydrationData() {
-    const userHydrationData = hydrationRepository.findUser(randomUser.id);
-    avgWaterAmount.innerText = userHydrationData.avgHydration();
+    avgWaterAmount.innerText = randomUser.findAvg('hydrationData', 'numOunces');
 }
