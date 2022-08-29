@@ -1,5 +1,7 @@
 // Your fetch requests will live here!
+function fetchData(repo) {
+  return fetch(`https://fitlit-api.herokuapp.com/api/v1/${repo}`)
+      .then(response => response.json());
+};
 
-
-console.log('I will be a fetch request!')
-
+export default fetchData;
