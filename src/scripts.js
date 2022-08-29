@@ -1,15 +1,13 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// Add methods from user sleep and hydration class to User class and call the findUser methods in the SleepRepo and HydrationRepo in order the set the properties of sleepData and hydrationData in the User class
-
 // DEPENDENCIES **************************************************
 import './css/styles.css';
 import './images/turing-logo.png';
 // import userData from './data/users';
 import fetchData from './apiCalls';
-import UserRepository from './UserRepository';
-import HydrationRepository from './HydrationRepository';
+import Repository from './Repository';
+import User from './User';
 
 // GLOBAL DATA ***************************************************
 var userRepository;
@@ -27,17 +25,19 @@ Promise.all([usersPromise, hydrationPromise])
     });
 
 function setData(repos) {
-    userRepository = new UserRepository(repos[0].userData);
+    userRepository = new Repository(repos[0].userData);
     randomUser = getRandomUser(userRepository.data);
-    hydrationRepository = new HydrationRepository(repos[1].hydrationData);
-    randomUser.setUserData(hydrationRepository, 'hydrationData');
+    hydrationRepository = new Repository(repos[1].hydrationData);
+    randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
 
     displayUserData();
 }
 
 function getRandomUser(users) {
     const randomIndex = Math.floor(Math.random() * users.length);
-    return userRepository.findUser(randomIndex);
+    const randomUserData = userRepository.findUser(randomIndex, 'id');
+    console.log("random user data", randomUserData);
+    return new User(randomUserData[0]);
 }
 
 // DOM ELEMENTS ***************************************************
@@ -67,10 +67,10 @@ function displayUserInfo() {
 
 function displayStepData() {
     userStepGoal.innerText = randomUser.dailyStepGoal;
-    repoStepGoal.innerText = userRepository.calculateAvgStepGoal();
+    repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
     userStrideLength.innerText = randomUser.strideLength;
 }
 
 function displayHydrationData() {
-    avgWaterAmount.innerText = randomUser.findAvg('hydrationData', 'numOunces');
+    avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
 }

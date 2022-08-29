@@ -14,22 +14,22 @@ class User {
     return this.name.split(' ', 1)[0];
   }
   
-  setUserData(repo, dataArray) {
-    this[dataArray] = repo.findUser(this.id);
+  setUserData(repo, dataArray, property) {
+    this[dataArray] = repo.findUser(this.id, property);
   }
 
-  findAvg(dataArray, measurement) {
+  calcUserAvg(dataArray, measurement) {
     return Math.floor(this[dataArray].reduce((acc, curr) => {
       acc += curr[measurement];
       return acc;
     }, 0) / this[dataArray].length);
   }
 
-  findDataByDate(date, dataArray) {
+  findUserDataByDate(date, dataArray) {
     return this[dataArray].find(entry => entry.date === date);
   }
 
-  getWeeklyData(startDate, endDate, dataArray) {
+  getUserWeeklyData(startDate, endDate, dataArray) {
     const weeklyData = [];
     for (let i = startDate; i < endDate; i++) {
       weeklyData.push(this[dataArray][i]);
