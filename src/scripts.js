@@ -10,16 +10,16 @@ import Repository from './Repository';
 import User from './User';
 
 // GLOBAL DATA ***************************************************
-var userRepository;
-var randomUser;
-var hydrationRepository;
-var timeframe;
+let userRepository;
+let randomUser;
+let hydrationRepository;
+let timeframe;
 
 // FETCH DATA *****************************************************
-const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
-const hydrationPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/hydration');
+// const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
+// const hydrationPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/hydration');
 
-Promise.all([usersPromise, hydrationPromise])
+Promise.all([fetchData("users"), fetchData("hydration")])
     .then((repos) => {
         console.log(repos);
         setData(repos);
@@ -31,7 +31,7 @@ function setData(repos) {
     hydrationRepository = new Repository(repos[1].hydrationData);
     randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
     timeframe = randomUser.hydrationData[0].date; // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
-
+  
     displayUserData();
 }
 
@@ -85,7 +85,7 @@ function displayHydrationData() {
 function setTimeframeDisplays() {
     // Conditional, timeframeDisplay, and avgWaterAmount needs to be updated when timeframe assigned to the correct date
     if (timeframe === randomUser.hydrationData[0].date) {
-        timeframeDisplay.innerText = randomUser.hydrationData[0].date;
+        timeframeDisplay.innerText = timeframe;
         timeframeButtonText.innerText = "WEEKLY";
         waterDate.innerText = timeframe;
         waterAmount.innerText = randomUser.hydrationData[0].numOunces;
