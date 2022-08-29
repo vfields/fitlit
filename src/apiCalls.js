@@ -1,5 +1,8 @@
 // Your fetch requests will live here!
+function fetchData(url) {
+  return fetch(url)
+      .then(promise => promise.json());
+};
 
-
-console.log('I will be a fetch request!')
+export default fetchData;
 

@@ -1,11 +1,14 @@
+import User from "./User";
+
 class UserRepository {
 
   constructor(data) {
     this.data = data;
   }
 
-  findUserData(id) {
-    return this.data.find(user => user.id === id);
+  findUser(id) {
+    const userData = this.data.find(user => user.id === id);
+    return new User(userData);
   }
 
   calculateAvgStepGoal() {

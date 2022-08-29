@@ -1,21 +1,46 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-console.log(userData,"<>>>>userData")
-// An example of how you tell webpack to use a CSS file
+// DEPENDENCIES **************************************************
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
-console.log('This is the JavaScript entry file - your code begins here.');
-
-// An example of how you tell webpack to use a JS file
-
-import userData from './data/users';
-
+import './images/turing-logo.png';
+// import userData from './data/users';
+import fetchData from './apiCalls';
 import UserRepository from './UserRepository';
+// import HydrationRepository from './HydrationRepository';
+// import SleepRepository from './SleepRepository';
 
+// GLOBAL DATA ***************************************************
+var userRepository;
+var randomUser;
+// var hydrationRepository;
+// var sleepRepository;
+
+// FETCH DATA *****************************************************
+const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
+const hydrationPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/hydration');
+const sleepPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/sleep');
+
+Promise.all([usersPromise, hydrationPromise, sleepPromise])
+    .then((repos) => {
+        console.log(repos);
+        setData(repos);
+    });
+
+function setData(repos) {
+    userRepository = new UserRepository(repos[0].userData);
+    // hydrationRepository = new HydrationRepository(repos[1].hydrationData);
+    // sleepRepository = new SleepRepository(repos[2].sleepData);
+    randomUser = getRandomUser(userRepository.data);
+    displayUserData();
+}
+
+function getRandomUser(users) {
+    const randomIndex = Math.floor(Math.random() * users.length);
+    return userRepository.findUser(randomIndex);
+}
+
+// DOM ELEMENTS ***************************************************
 const userFirstName = document.querySelector(".user-first-name");
 const userAddress = document.querySelector(".user-address");
 const userEmail = document.querySelector(".user-email");
@@ -24,23 +49,22 @@ const repoStepGoal = document.querySelector(".repo-step-goal");
 const userStrideLength = document.querySelector(".user-stride-length");
 const userFriends = document.querySelector(".friend-names");
 
-const getRandomUser = (user) => {
-    let randomUser = Math.floor(Math.random() * user.length);
-    return user[randomUser];
-}
-const randomUser = getRandomUser(userData);
+// EVENT LISTENERS ************************************************
 
-const displayUserData = () => {
+// EVENT HANDLERS *************************************************
+function displayUserData() {
+    displayUserInfo();
+    displayAvgSteps();
+}
+
+function displayUserInfo() {
     userFirstName.innerText = randomUser.name;
     userAddress.innerText = randomUser.address;
     userEmail.innerText = randomUser.email; 
 }
-displayUserData();
 
-const averageSteps = () => {
+function displayAvgSteps() {
     userStepGoal.innerText = randomUser.dailyStepGoal;
-    let usersRepo = new UserRepository(userData);
-    repoStepGoal.innerText = usersRepo.calculateAvgStepGoal();
-    userStrideLength.innerText = randomUser.strideLength
+    repoStepGoal.innerText = userRepository.calculateAvgStepGoal();
+    userStrideLength.innerText = randomUser.strideLength;
 }
-averageSteps();
