@@ -30,11 +30,11 @@ class User {
   }
 
   getUserWeeklyData(startDate, endDate, dataArray) {
-    const datesOnlyArray = dataArray.map(dataObject => dataObject.date);
+    const datesOnlyArray = this[dataArray].map(dataObject => dataObject.date);
     const indexOne = datesOnlyArray.indexOf(startDate);
     const indexTwo = datesOnlyArray.indexOf(endDate);
-    const weekArray = dataArray.slice(indexOne, indexTwo)
-    return weekArray
+    const weekArray = this[dataArray].slice(indexOne, indexTwo);
+    return weekArray;
   }
 }
 

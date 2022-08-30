@@ -62,9 +62,13 @@ const sleepDate = document.querySelector(".sleep-date");
 const sleepAmount = document.querySelector(".sleep-amount");
 const avgSleepQuality = document.querySelector(".avg-sleep-quality");
 const sleepQual = document.querySelector(".sleep-quality");
+const waterInfo = document.querySelector(".water-information");
+const timeFrameBtn = document.querySelector(".timeframe-button");
 
 
 // EVENT LISTENERS ************************************************
+
+timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
 
 // EVENT HANDLERS *************************************************
 function displayUserData() {
@@ -88,23 +92,40 @@ function displayStepData() {
 function displayWidgetData() {
     avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
     avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
-    avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality'); 
+    avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
     setTimeframeDisplays();
 }
 
 function setTimeframeDisplays() {
+  console.log('HIIIIIIIIII')
+    waterInfo.innerHTML = ""
     // Conditional, timeframeDisplay, and avgWaterAmount needs to be updated when timeframe assigned to the correct date
     if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+      console.log('IF')
         timeframeDisplay.innerText = timeframe;
         timeframeButtonText.innerText = "WEEKLY";
         waterDate.innerText = timeframe;
         sleepDate.innerText = timeframe;
         waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
+        waterInfo.innerHTML += `<p><span class="water-date">${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span> : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`
         sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
         sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
-
     } else {
+      console.log('ELSE')
         timeframeButtonText.innerText = "TODAY'S";
+        let displayHydrationDays = randomUser.getUserWeeklyData(randomUser.hydrationData[randomUser.hydrationData.length - 8].date, randomUser.hydrationData[randomUser.hydrationData.length - 1].date, 'hydrationData');        
+        displayHydrationDays.forEach((element) => {
+          waterInfo.innerHTML += `<p><span class="water-date">${element.date}</span> : <span class="water-amount">${element.numOunces}</span> oz</p>`
+        });
         // Need to create multiple entries for weekly data
     }
+}
+
+function displayWeeklyTimeFrames() {
+  if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+    timeframe = 0;
+  } else {
+    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  }
+  setTimeframeDisplays();
 }
