@@ -31,9 +31,10 @@ function setData(repos) {
     randomUser = getRandomUser(userRepository.data);
     hydrationRepository = new Repository(repos[1].hydrationData);
     randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
-    timeframe = randomUser.hydrationData[0].date; // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
+    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+    console.log(timeframe); // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
     sleepRepository = new Repository(repos[2].sleepData);
-    randomUser.setUserData(sleepRepository, 'sleepData', 'userID');    
+    randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
     displayUserData();
 }
 
