@@ -59,7 +59,9 @@ const waterDate = document.querySelector(".water-date");
 const waterAmount = document.querySelector(".water-amount");
 const avgSleepAmount = document.querySelector(".avg-sleep-amount");
 const sleepDate = document.querySelector(".sleep-date");
-const sleepAmount = document.querySelector(".sleep-amount")
+const sleepAmount = document.querySelector(".sleep-amount");
+const avgSleepQuality = document.querySelector(".avg-sleep-quality");
+const sleepQuality = document.querySelector(".sleep-quality");
 
 // EVENT LISTENERS ************************************************
 
