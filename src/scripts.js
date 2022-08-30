@@ -32,7 +32,6 @@ function setData(repos) {
     hydrationRepository = new Repository(repos[1].hydrationData);
     randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-    console.log(timeframe); // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
     sleepRepository = new Repository(repos[2].sleepData);
     randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
     displayUserData();
@@ -58,6 +57,7 @@ const timeframeButtonText = document.querySelector(".timeframe-button-text");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
 const waterDate = document.querySelector(".water-date");
 const waterAmount = document.querySelector(".water-amount");
+const avgSleepAmount = document.querySelector(".avg-sleep-amount");
 
 // EVENT LISTENERS ************************************************
 
@@ -65,7 +65,7 @@ const waterAmount = document.querySelector(".water-amount");
 function displayUserData() {
     displayUserInfo();
     displayStepData();
-    displayHydrationData();
+    displayWidgetData();
 }
 
 function displayUserInfo() {
@@ -80,14 +80,15 @@ function displayStepData() {
     userStrideLength.innerText = randomUser.strideLength;
 }
 
-function displayHydrationData() {
+function displayWidgetData() {
     avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+    avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
     setTimeframeDisplays();
 }
 
 function setTimeframeDisplays() {
     // Conditional, timeframeDisplay, and avgWaterAmount needs to be updated when timeframe assigned to the correct date
-    if (timeframe === randomUser.hydrationData[0].date) {
+    if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
         timeframeDisplay.innerText = timeframe;
         timeframeButtonText.innerText = "WEEKLY";
         waterDate.innerText = timeframe;
