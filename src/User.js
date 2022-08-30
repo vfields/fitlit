@@ -13,7 +13,7 @@ class User {
   findUserFirstName() {
     return this.name.split(' ', 1)[0];
   }
-  
+
   setUserData(repo, dataArray, property) {
     this[dataArray] = repo.findUser(this.id, property);
   }
@@ -30,12 +30,11 @@ class User {
   }
 
   getUserWeeklyData(startDate, endDate, dataArray) {
-    const weeklyData = [];
-    for (let i = startDate; i < endDate; i++) {
-      weeklyData.push(this[dataArray][i]);
-    }
-
-    return weeklyData;
+    const datesOnlyArray = dataArray.map(dataObject => dataObject.date);
+    const indexOne = datesOnlyArray.indexOf(startDate);
+    const indexTwo = datesOnlyArray.indexOf(endDate);
+    const weekArray = dataArray.slice(indexOne, indexTwo)
+    return weekArray
   }
 }
 
