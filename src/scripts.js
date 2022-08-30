@@ -61,7 +61,8 @@ const avgSleepAmount = document.querySelector(".avg-sleep-amount");
 const sleepDate = document.querySelector(".sleep-date");
 const sleepAmount = document.querySelector(".sleep-amount");
 const avgSleepQuality = document.querySelector(".avg-sleep-quality");
-const sleepQuality = document.querySelector(".sleep-quality");
+const sleepQual = document.querySelector(".sleep-quality");
+
 
 // EVENT LISTENERS ************************************************
 
@@ -87,7 +88,7 @@ function displayStepData() {
 function displayWidgetData() {
     avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
     avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
-
+    avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality'); 
     setTimeframeDisplays();
 }
 
@@ -100,6 +101,8 @@ function setTimeframeDisplays() {
         sleepDate.innerText = timeframe;
         waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
         sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
+        sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
+
     } else {
         timeframeButtonText.innerText = "TODAY'S";
         // Need to create multiple entries for weekly data
