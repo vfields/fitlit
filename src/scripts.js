@@ -14,12 +14,13 @@ let userRepository;
 let randomUser;
 let hydrationRepository;
 let timeframe;
+let sleepRepository;
 
 // FETCH DATA *****************************************************
 // const usersPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/users');
 // const hydrationPromise = fetchData('https://fitlit-api.herokuapp.com/api/v1/hydration');
 
-Promise.all([fetchData("users"), fetchData("hydration")])
+Promise.all([fetchData("users"), fetchData("hydration"), fetchData("sleep")])
     .then((repos) => {
         console.log(repos);
         setData(repos);
@@ -31,7 +32,8 @@ function setData(repos) {
     hydrationRepository = new Repository(repos[1].hydrationData);
     randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
     timeframe = randomUser.hydrationData[0].date; // This is the least recent day not the most recent. Set to specific date (maybe the real life today)
-  
+    sleepRepository = new Repository(repos[2].sleepData);
+    randomUser.setUserData(sleepRepository, 'sleepData', 'userID');    
     displayUserData();
 }
 
@@ -68,7 +70,7 @@ function displayUserData() {
 function displayUserInfo() {
     userFirstName.innerText = randomUser.name;
     userAddress.innerText = randomUser.address;
-    userEmail.innerText = randomUser.email; 
+    userEmail.innerText = randomUser.email;
 }
 
 function displayStepData() {
