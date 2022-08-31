@@ -3,37 +3,37 @@
 export const hydrationMockData = [
     {"userID": 1,
     "date": "2019/06/15",
-    "numOunces": 37
+    "numOunces": 30
     },
 
     {"userID": 1,
     "date": "2019/06/16",
-    "numOunces": 64
+    "numOunces": 60
     },
 
     {"userID": 1,
     "date": "2019/06/17",
-    "numOunces": 50
+    "numOunces": 40
     },
 
     {"userID": 1,
     "date": "2019/06/18",
-    "numOunces": 17
+    "numOunces": 10
     },
 
     {"userID": 1,
     "date": "2019/06/19",
-    "numOunces": 27
+    "numOunces": 20
     },
 
     { "userID": 1,
     "date": "2019/06/20",
-    "numOunces": 5
+    "numOunces": 50
     },
 
     {"userID": 1,
     "date": "2019/06/21 ",
-    "numOunces": 31
+    "numOunces": 30
     },
 
     {"userID": 27,
@@ -41,10 +41,15 @@ export const hydrationMockData = [
     "numOunces": 50
     },
 
-    {"userID":17,
+    {"userID": 17,
     "date": "2019/06/01",
     "numOunces": 50
-    }
+    }, 
+
+    {"userID": 18,
+    "date": "2019/06/01",
+    "numOunces": 50
+    }, 
 
 ]
 

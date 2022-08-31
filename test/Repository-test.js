@@ -38,8 +38,9 @@ describe('Repository', () => {
 
   it ('should be able to calculate the average of a given property amongst all users', () => {
     const stepGoalAvg = userRepo.calcRepoAvg('dailyStepGoal');
-
+    const numOuncesAvg = hydrationRepo.calcRepoAvg('numOunces');
 
     expect(stepGoalAvg).to.equal(7000);
-  })
+    expect(numOuncesAvg).to.equal(39);
+  });
 });
