@@ -114,6 +114,13 @@ function displayHydrationData () {
    : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
 }
 
+function displaySleepWeek (){
+  let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 8].date, randomUser.sleepData[randomUser.sleepData.length - 1].date, 'sleepData');
+        displaySleepDays.forEach((element) => {
+          sleepInfo.innerHTML += `<p><span class="sleep-date">${element.date}</span> : <span class="sleep-amount">${element.hoursSlept}</span> hrs, <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality</p>`;
+        });
+}
+
 function setTimeframeDisplays() {
   console.log('HIIIIIIIIII')
     waterInfo.innerHTML = "";
@@ -122,14 +129,14 @@ function setTimeframeDisplays() {
       console.log('IF')
         timeframeDisplay.innerText = timeframe;
         timeframeButtonText.innerText = "WEEKLY";
+        displaySleepData()
+        displayHydrationData()
         // waterDate.innerText = timeframe;
         // sleepDate.innerText = timeframe;
         // waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
         // waterInfo.innerHTML += `<p><span class="water-date">${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span> : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
         // sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
         // sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
-       displaySleepData()
-       displayHydrationData()
         // sleepInfo.innerHTML += `<p><span class="sleep-date">${randomUser.sleepData[randomUser.sleepData.length - 1].date}</span> : <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs, <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality</p>`;
     } else {
       console.log('ELSE')
@@ -138,10 +145,11 @@ function setTimeframeDisplays() {
         displayHydrationDays.forEach((element) => {
           waterInfo.innerHTML += `<p><span class="water-date">${element.date}</span> : <span class="water-amount">${element.numOunces}</span> oz</p>`;
         });
-        let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 8].date, randomUser.sleepData[randomUser.sleepData.length - 1].date, 'sleepData');
-        displaySleepDays.forEach((element) => {
-          sleepInfo.innerHTML += `<p><span class="sleep-date">${element.date}</span> : <span class="sleep-amount">${element.hoursSlept}</span> hrs, <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality</p>`;
-        });
+        displaySleepWeek()
+        // let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 8].date, randomUser.sleepData[randomUser.sleepData.length - 1].date, 'sleepData');
+        // displaySleepDays.forEach((element) => {
+        //   sleepInfo.innerHTML += `<p><span class="sleep-date">${element.date}</span> : <span class="sleep-amount">${element.hoursSlept}</span> hrs, <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality</p>`;
+        // });
     }
 }
 
