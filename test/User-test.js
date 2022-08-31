@@ -3,6 +3,7 @@ import User from '../src/User';
 import userData from '../src/data/userData';
 import Repository from '../src/Repository';
 import { hydrationMockData } from '../src/data/hydrationData'; 
+import { sleepData } from '../src/data/sleepData';
 
 describe('User', () => {
   it ('should be a function', () => {
@@ -50,5 +51,27 @@ describe('User', () => {
     expect(user1.hydrationData).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6]]);
   });
 
-  it ('should be able to calculate the average of a given user\'s data')
+  it ('should be able to calculate the average of a given user\'s data', () => {
+    const hydroRepo = new Repository(hydrationMockData);
+    user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    
+    const sleepRepo = new Repository(sleepData);
+    user1.setUserData(sleepRepo, 'sleepData', 'userID');
+
+    expect(user1.calcUserAvg('hydrationData', 'numOunces')).to.equal(34);
+    expect(user1.calcUserAvg('sleepData', 'hoursSlept')).to.equal(10);
+  });
+
+  it ('should be able to find the data for a user when provided a date', () => {
+    const hydroRepo = new Repository(hydrationMockData);
+    user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    
+    const sleepRepo = new Repository(sleepData);
+    user1.setUserData(sleepRepo, 'sleepData', 'userID');
+
+    expect(user1.findUserDataByDate('2019/06/15', 'hydrationData')).to.deep.equal(hydrationMockData[0]);
+    expect(user1.findUserDataByDate('2019/06/15', 'sleepData')).to.deep.equal(sleepData[0]);
+  });
+
+  it
 });
