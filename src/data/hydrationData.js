@@ -32,12 +32,12 @@ export const hydrationMockData = [
     },
 
     {"userID": 1,
-    "date": "2019/06/21 ",
+    "date": "2019/06/21",
     "numOunces": 30
     },
 
-    {"userID": 27,
-    "date": "2019/06/11",
+    {"userID": 1,
+    "date": "2019/06/22",
     "numOunces": 50
     },
 

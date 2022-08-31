@@ -32,7 +32,7 @@ class User {
     const datesOnlyArray = this[dataArray].map(dataObject => dataObject.date);
     const indexOne = datesOnlyArray.indexOf(startDate);
     const indexTwo = datesOnlyArray.indexOf(endDate);
-    const weekArray = this[dataArray].slice(indexOne, indexTwo);
+    const weekArray = this[dataArray].slice(indexOne, indexTwo + 1);
     return weekArray;
   }
 }
