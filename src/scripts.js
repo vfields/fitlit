@@ -106,13 +106,13 @@ function displaySleepData(){
   sleepInfo.innerHTML += `<p><span class="sleep-date">${randomUser.sleepData[randomUser.sleepData.length - 1].date}</span> : <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs, <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality</p>`;
 }
 
-// function displayHydrationData () {
-//   waterDate.innerText = timeframe;
-//   waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
-//   waterInfo.innerHTML += `<p><span class="water-date">
-//   ${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span>
-//    : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
-// }
+function displayHydrationData () {
+  waterDate.innerText = timeframe;
+  waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
+  waterInfo.innerHTML += `<p><span class="water-date">
+  ${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span>
+   : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
+}
 
 function setTimeframeDisplays() {
   console.log('HIIIIIIIIII')
@@ -122,13 +122,14 @@ function setTimeframeDisplays() {
       console.log('IF')
         timeframeDisplay.innerText = timeframe;
         timeframeButtonText.innerText = "WEEKLY";
-        waterDate.innerText = timeframe;
+        // waterDate.innerText = timeframe;
         // sleepDate.innerText = timeframe;
-        waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
-        waterInfo.innerHTML += `<p><span class="water-date">${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span> : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
+        // waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
+        // waterInfo.innerHTML += `<p><span class="water-date">${randomUser.hydrationData[randomUser.hydrationData.length - 1].date}</span> : <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz</p>`;
         // sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
         // sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
        displaySleepData()
+       displayHydrationData()
         // sleepInfo.innerHTML += `<p><span class="sleep-date">${randomUser.sleepData[randomUser.sleepData.length - 1].date}</span> : <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs, <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality</p>`;
     } else {
       console.log('ELSE')
