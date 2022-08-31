@@ -1,13 +1,17 @@
 import { expect } from 'chai';
-import UserRepository from '../src/UserRepository';
+import Repository from '../src/Repository';
+import {hydrationMockData } from '../src/data/hydrationData';
 
-describe('User Repository', () => {
+
+describe('Repository', () => {
   it('should be a function', function () {
-    expect(UserRepository).to.be.a('function');
+    expect(Repository).to.be.a('function');
   });
 
   let userData;
   let userRepo;
+  let hydrationData;
+  let hydrationRepo; 
 
   beforeEach(() => {
     userData = [
@@ -52,11 +56,12 @@ describe('User Repository', () => {
          33
        ]
      }];
-     userRepo = new UserRepository(userData);
+     userRepo = new Repository(userData);
+     hydrationRepo = new Repository()
   });
 
-  it ('should be an instance of UserRepository', () => {
-    expect(userRepo).to.be.an.instanceOf(UserRepository);
+  it ('should be an instance of Repository', () => {
+    expect(userRepo).to.be.an.instanceOf(Repository);
   });
 
   it ('should store user data', () => {
