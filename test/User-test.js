@@ -48,7 +48,7 @@ describe('User', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
 
     expect(user1).to.have.property('hydrationData');
-    expect(user1.hydrationData).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6]]);
+    expect(user1.hydrationData).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6], hydrationMockData[7]]);
   });
 
   it ('should be able to calculate the average of a given user\'s data', () => {
@@ -58,7 +58,7 @@ describe('User', () => {
     const sleepRepo = new Repository(sleepData);
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
 
-    expect(user1.calcUserAvg('hydrationData', 'numOunces')).to.equal(34);
+    expect(user1.calcUserAvg('hydrationData', 'numOunces')).to.equal(36);
     expect(user1.calcUserAvg('sleepData', 'hoursSlept')).to.equal(10);
   });
 
@@ -73,5 +73,15 @@ describe('User', () => {
     expect(user1.findUserDataByDate('2019/06/15', 'sleepData')).to.deep.equal(sleepData[0]);
   });
 
-  it
+  it ('should be able to return the weekly data for a user', () => {
+    const hydroRepo = new Repository(hydrationMockData);
+    user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    
+    const sleepRepo = new Repository(sleepData);
+    user1.setUserData(sleepRepo, 'sleepData', 'userID');
+
+    expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6]]);
+    expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'sleepData')).to.deep.equal([sleepData[0], sleepData[1], sleepData[2], sleepData[3], sleepData[4], sleepData[5], sleepData[6]]);
+  });
 });
+
