@@ -10,8 +10,6 @@ describe('User', () => {
     expect(User).to.be.a('function');
   });
 
-  console.log(userData);
-
   let user1;
   let user2;
 
@@ -28,14 +26,10 @@ describe('User', () => {
   });
 
   it ('should store user properties in each instance from the data', () => {
-    // refactor with Object.keys(user1)!
-    expect(user1.id).to.equal(userData[0].id);
-    expect(user1.name).to.equal(userData[0].name);
-    expect(user1.address).to.equal(userData[0].address);
-    expect(user1.email).to.equal(userData[0].email);
-    expect(user1.strideLength).to.equal(userData[0].strideLength);
-    expect(user1.dailyStepGoal).to.equal(userData[0].dailyStepGoal);
-    expect(user1.friends).to.equal(userData[0].friends);
+    Object.keys(user1)
+      .forEach(key => {
+        expect(user1[key]).to.equal(userData[0][key]);
+      });
   });
 
   it ('should return a user first name only', () => {
