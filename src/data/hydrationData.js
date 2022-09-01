@@ -1,6 +1,4 @@
-
-
-export const hydrationMockData = [
+const hydrationData = [
     {"userID": 1,
     "date": "2019/06/15",
     "numOunces": 30
@@ -44,16 +42,12 @@ export const hydrationMockData = [
     {"userID": 17,
     "date": "2019/06/01",
     "numOunces": 50
-    }, 
+    },
 
     {"userID": 18,
     "date": "2019/06/01",
     "numOunces": 50
-    }, 
+    }
+];
 
-]
-
-
-
-
-
+export default hydrationData;

@@ -1,5 +1,4 @@
-
- const userData = [
+const userData = [
   {
     "id": 1,
     "name": "Luisa Hane",
@@ -40,6 +39,6 @@
       42,
       33
     ]
-  }]
-  
+  }];
+
 export default userData;
