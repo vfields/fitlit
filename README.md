@@ -1,78 +1,105 @@
-# FitLit Starter Kit
+<a name="readme-top"></a>
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+<!-- HEADER -->
+<h3 align="center">FitLit</h3>
+  <p align="center">
+    An Activity Tracker
+    <br />
+    <a href="https://github.com/vfields/fitlit"><strong>Explore the docs »</strong></a>
+  </p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+        <a href="#features">Features</a>
+        <ul>
+            <li><a href="#reflections">Reflections</a>
+        </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+## About The Project
+Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
+<p align="center">
+    <img width="500" src="https://media.giphy.com/media/dfSSwSOJQL0Yqlawmp/giphy.gif" alt="FitLit preview gif">
+</p>
+<br />
+This project was assigned during the second module of Turing's Front-End Engineering program, about 8 weeks into its students learning how to code. The details of this project are outlined in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+
+### Built With
+
+* [![JavaScript][JavaScript.com]][JavaScript-url]
+* [![CSS][w3.org/Style/CSS/Overview.en.html]][CSS-url]
+* [![HTML5][w3.org]][HTML-url]
+* [![Mocha][https://mochajs.org/]][Mocha-url]
+* [![Chai][https://www.chaijs.com/]][Chai-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Setup
+- Clone the repository to your local machine
+- `cd` into the project
+- Run `npm install` to install project dependencies
+- Run `npm start` to launch the live server
+- Copy and paste the provided localhost URL into your browser
+- Explore and enjoy!
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Testing
+## Roadmap
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
+- [ ] Implement widget extensions
+- [ ] Use chart.js to display data
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Data Model
+## Features
 
-**Users**
+- Displays a single user's data retrieved using the fetch API to the DOM
+- Utilizes class-to-class interaction and a robust Mocha and Chai testing suite
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+### Reflections
+* Wins:<br>
+We were proud of the dynamic code created to organize our User class structure so that it identifies a unique user's information from multiple data bases. We also utilized iterator methods both in our main script file as well as our testing suite. 
 
-**Activity**
+* Challenges:<br>
+This was all of our group members' first time working with WebPack and network requests.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Hydration**
+## Contact
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
+Hazel Pablo - [LinkedIn](https://www.linkedin.com/in/hazel-pablo-704779245/) - [GitHub](https://github.com/Hpablo08)<br>
+Hunter Monroe - [LinkedIn](https://www.linkedin.com/in/hunter-monroe-035ab0188/) - [GitHub](https://github.com/Hmonroe2)<br>
+Tori Fields - [LinkedIn](https://www.linkedin.com/in/victoria-ashley-fields/) - [GitHub](https://github.com/vfields)<br>
+Matthew Press - [LinkedIn](https://www.linkedin.com/in/matthew-press-813961246/) - [GitHub](https://github.com/MatthewPress)<br>
 
-**Sleep**
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+<!-- MARKDOWN LINKS & IMAGES -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/matthew-press-813961246/
+[product-demo]: images/demo.gif
+[JavaScript.com]: https://img.shields.io/badge/-JavaScript-yellow
+[JavaScript-url]: https://www.javascript.com/
+[w3.org/Style/CSS/Overview.en.html]: https://img.shields.io/badge/-CSS-blue
+[CSS-url]: https://www.w3.org/Style/CSS/Overview.en.html
+[w3.org]: https://img.shields.io/badge/-HTML5-red
+[HTML-url]: https://www.w3.org/
+[Mocha-url]: https://mochajs.org/
+[https://mochajs.org/]: https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=Mocha&logoColor=white
+[Chai-url]: https://www.chaijs.com/
+[https://www.chaijs.com/]: https://img.shields.io/badge/Chai-A30701?style=for-the-badge&logo=chai&logoColor=white
