@@ -57,11 +57,12 @@ This project was assigned during the second module of Turing's Front-End Enginee
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Setup
-
 - Clone the repository to your local machine
 - `cd` into the project
-- `open index.html`
-- Grab a partner and take turns picking grid squares
+- Run `npm install` to install project dependencies
+- Run `npm start` to launch the live server
+- Copy and paste the provided localhost URL into your browser
+- Explore and enjoy!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -115,8 +116,6 @@ Project Link: [https://github.com/vfields/fitlit](https://github.com/vfields/fit
 
 ## Setup
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
 1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
 1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
 1. Make sure both members of your team are collaborators on the forked repo.  
