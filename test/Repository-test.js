@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Repository from '../src/Repository';
-import {hydrationMockData } from '../src/data/hydrationData';
+import hydrationMockData from '../src/data/hydrationData';
 import userData from '../src/data/userData';
 
 
@@ -10,7 +10,7 @@ describe('Repository', () => {
   });
 
   let userRepo;
-  let hydrationRepo; 
+  let hydrationRepo;
 
   beforeEach(() => {
      userRepo = new Repository(userData);

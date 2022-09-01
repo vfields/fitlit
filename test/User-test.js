@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import User from '../src/User';
 import userData from '../src/data/userData';
 import Repository from '../src/Repository';
-import { hydrationMockData } from '../src/data/hydrationData';
+import hydrationMockData from '../src/data/hydrationData';
 import { sleepData } from '../src/data/sleepData';
 
 describe('User', () => {
