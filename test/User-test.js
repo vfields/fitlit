@@ -34,6 +34,10 @@ describe('User', () => {
       .forEach(key => {
         expect(user1[key]).to.equal(userData[0][key]);
       });
+    Object.keys(user2)
+      .forEach(key => {
+        expect(user2[key]).to.equal(userData[1][key]);
+      });
   });
 
   it ('should return a user first name only', () => {
@@ -43,9 +47,12 @@ describe('User', () => {
 
   it ('should create a property that holds data for a specific user', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    user2.setUserData(sleepRepo, 'sleepData', 'userID');
 
     expect(user1).to.have.property('hydrationData');
+    expect(user2).to.have.property('sleepData');
     expect(user1.hydrationData).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6], hydrationData[7]]);
+    expect(user2.sleepData).to.deep.equal([sleepData[7]]);
   });
 
   it ('should be able to calculate the average of a given user\'s data', () => {
