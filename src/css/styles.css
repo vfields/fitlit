@@ -12,24 +12,31 @@ section {
 }
 
 body, html {
-  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  background: #241734;
   background-repeat: no-repeat;
   height: 100%;
+  font-family: open-sans, sans-serif;
+  color: white;
 }
 
 span {
-  color: red;
+  color: #FF4365;
 }
 
 button {
   color: white;
-  background-color: pink;
+  background-color: #202A44;
 }
 
 /* FONTS *********************************************** */
- 
-/* 
+h1, h2 ,h3 {
+  font-family: 'Masiku', sans-serif;
+  color: #F6019D;
+}
+
+/*
 h1-h6 { }
+
 
 p { }
 
@@ -43,14 +50,17 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   padding: 10px;
+  text-align: center;
 }
 
 header {
   grid-column: span 2;
-}
 
+}
 .friends-section {
   grid-row: span 4;
+
+
 }
 
 .controls-section {
@@ -69,4 +79,6 @@ button {
   padding: 10px;
   border-radius: 10px;
   filter: drop-shadow(7px 5px 2px #212121);
+  background: rgb(2,0,36);
+  background: linear-gradient(40deg, rgba(2,0,36,1) 0%, rgba(101,13,137,1) 38%, rgba(0,212,255,1) 100%);
 }
