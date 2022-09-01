@@ -83,6 +83,13 @@ function displayUserInfo() {
   userFirstName.innerText = randomUser.name;
   userAddress.innerText = randomUser.address;
   userEmail.innerText = randomUser.email;
+  const theirFriends = randomUser.friends.flatMap(friend => userRepository.findUser(friend, 'id'));
+  const theirFriendsSteps = theirFriends.map(foe => foe.dailyStepGoal);
+  const theirFriendsName = theirFriends.map(foe => foe.name).forEach((friend) => {
+    userFriends.innerHTML += `<p>${friend}</p>`
+  });
+
+
 
 }
 
