@@ -1,4 +1,4 @@
-const hydrationMockData = [
+const hydrationData = [
     {"userID": 1,
     "date": "2019/06/15",
     "numOunces": 30
@@ -50,4 +50,4 @@ const hydrationMockData = [
     }
 ];
 
-export default hydrationMockData;
+export default hydrationData;

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import User from '../src/User';
 import userData from '../src/data/userData';
 import Repository from '../src/Repository';
-import hydrationMockData from '../src/data/hydrationData';
+import hydrationData from '../src/data/hydrationData';
 import { sleepData } from '../src/data/sleepData';
 
 describe('User', () => {
@@ -18,7 +18,7 @@ describe('User', () => {
   beforeEach(() => {
     user1 = new User(userData[0]);
     user2 = new User(userData[1]);
-    hydroRepo = new Repository(hydrationMockData);
+    hydroRepo = new Repository(hydrationData);
     sleepRepo = new Repository(sleepData);
   });
 
@@ -45,7 +45,7 @@ describe('User', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
 
     expect(user1).to.have.property('hydrationData');
-    expect(user1.hydrationData).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6], hydrationMockData[7]]);
+    expect(user1.hydrationData).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6], hydrationData[7]]);
   });
 
   it ('should be able to calculate the average of a given user\'s data', () => {
@@ -60,7 +60,7 @@ describe('User', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
 
-    expect(user1.findUserDataByDate('2019/06/15', 'hydrationData')).to.deep.equal(hydrationMockData[0]);
+    expect(user1.findUserDataByDate('2019/06/15', 'hydrationData')).to.deep.equal(hydrationData[0]);
     expect(user1.findUserDataByDate('2019/06/15', 'sleepData')).to.deep.equal(sleepData[0]);
   });
 
@@ -68,7 +68,7 @@ describe('User', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
 
-    expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationMockData[0], hydrationMockData[1], hydrationMockData[2], hydrationMockData[3], hydrationMockData[4], hydrationMockData[5], hydrationMockData[6]]);
+    expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6]]);
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'sleepData')).to.deep.equal([sleepData[0], sleepData[1], sleepData[2], sleepData[3], sleepData[4], sleepData[5], sleepData[6]]);
   });
 });

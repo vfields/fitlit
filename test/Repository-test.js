@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Repository from '../src/Repository';
-import hydrationMockData from '../src/data/hydrationData';
+import hydrationData from '../src/data/hydrationData';
 import userData from '../src/data/userData';
 
 
@@ -14,7 +14,7 @@ describe('Repository', () => {
 
   beforeEach(() => {
      userRepo = new Repository(userData);
-     hydrationRepo = new Repository(hydrationMockData);
+     hydrationRepo = new Repository(hydrationData);
   });
 
   it ('should be an instance of Repository', () => {
@@ -23,7 +23,7 @@ describe('Repository', () => {
 
   it ('should store any repo data', () => {
     expect(userRepo.data).to.deep.equal(userData);
-    expect(hydrationRepo.data).to.deep.equal(hydrationMockData);
+    expect(hydrationRepo.data).to.deep.equal(hydrationData);
   });
 
   it ('should be able to find user data given a user ID', () => {
@@ -33,7 +33,7 @@ describe('Repository', () => {
 
     expect(user1[0]).to.equal(userData[0]);
     expect(user2[0]).to.equal(userData[1]);
-    expect(user3[0]).to.equal(hydrationMockData[0]);
+    expect(user3[0]).to.equal(hydrationData[0]);
   });
 
   it ('should be able to calculate the average of a given property amongst all users', () => {
