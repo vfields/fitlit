@@ -1,12 +1,5 @@
 <a name="readme-top"></a>
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/vfields/fitlit">
-    <img src="images/favicon.ico" alt="Logo" width="80" height="80">
-  </a>
-
 <!-- HEADER -->
 <h3 align="center">FitLit</h3>
   <p align="center">
@@ -29,7 +22,7 @@
     <li><a href="#setup">Setup</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li>
-        <a href="#notes">Notes</a>
+        <a href="#features">Features</a>
         <ul>
             <li><a href="#reflections">Reflections</a>
         </ul>
@@ -39,10 +32,10 @@
 </details>
 
 ## About The Project
-
-[![Demo][product-demo]](images/demo.gif)
-Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.
-
+Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
+<p align="center">
+    <img width="500" src="https://media.giphy.com/media/dfSSwSOJQL0Yqlawmp/giphy.gif" alt="FitLit preview gif">
+</p>
 <br />
 This project was assigned during the second module of Turing's Front-End Engineering program, about 8 weeks into its students learning how to code. The details of this project are outlined in [this project spec](http://frontend.turing.io/projects/fitlit.html).
 
@@ -68,34 +61,31 @@ This project was assigned during the second module of Turing's Front-End Enginee
 
 ## Roadmap
 
-- [ ] Utilize JSON and localStorage to save the game data locally so it persists when the page is refreshed
-- [ ] Allow players to choose their token
+- [ ] Implement widget extensions
+- [ ] Use chart.js to display data
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Notes
+## Features
 
-Planning documents for this project: [Google Doc](https://docs.google.com/document/d/1CoiL1VDHqBoSPtplJtX_yfX9O63XWgLtd8kR_6Rthu0/edit)
+- Displays a single user's data retrieved using the fetch API to the DOM
+- Utilizes class-to-class interaction and a robust Mocha and Chai testing suite
 
 ### Reflections
-* Wins
-I think the planning I put into this project from the beginning helped me visualize every element I would need and how it would all fit together
+* Wins:<br>
+We were proud of the dynamic code created to organize our User class structure so that it identifies a unique user's information from multiple data bases. We also utilized iterator methods both in our main script file as well as our testing suite. 
 
-What I enjoyed most about this project was learning about and applying all the smaller pieces that go into a well-rounded project (i.e. adding a license and pull request template).
-
-* Challenges
-Trying to capture ever win condition without utilizing an array iterator was difficult, and the solution I came up with had a lot of nested for loops and conditionals
+* Challenges:<br>
+This was all of our group members' first time working with WebPack and network requests.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contact
 
-Hazel Pablo
-Hunter Monroe
-Tori Fields
-Matthew Press - [@MatthewPres2](https://twitter.com/MatthewPres2) - press.matt14@gmail.com
-
-Project Link: [https://github.com/vfields/fitlit](https://github.com/vfields/fitlit)
+Hazel Pablo - [LinkedIn](https://www.linkedin.com/in/hazel-pablo-704779245/) - [GitHub](https://github.com/Hpablo08)<br>
+Hunter Monroe - [LinkedIn](https://www.linkedin.com/in/hunter-monroe-035ab0188/) - [GitHub](https://github.com/Hmonroe2)<br>
+Tori Fields - [LinkedIn](https://www.linkedin.com/in/victoria-ashley-fields/) - [GitHub](https://github.com/vfields)<br>
+Matthew Press - [LinkedIn](https://www.linkedin.com/in/matthew-press-813961246/) - [GitHub](https://github.com/MatthewPress)<br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -110,13 +100,6 @@ Project Link: [https://github.com/vfields/fitlit](https://github.com/vfields/fit
 [w3.org]: https://img.shields.io/badge/-HTML5-red
 [HTML-url]: https://www.w3.org/
 [Mocha-url]: https://mochajs.org/
-[https://mochajs.org/]: 
+[https://mochajs.org/]: https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=Mocha&logoColor=white
 [Chai-url]: https://www.chaijs.com/
-[https://www.chaijs.com/]:
-
-## Setup
-
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
+[https://www.chaijs.com/]: https://img.shields.io/badge/Chai-A30701?style=for-the-badge&logo=chai&logoColor=white
