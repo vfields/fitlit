@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Repository from '../src/Repository';
-import hydrationData from '../src/data/hydrationData';
 import userData from '../src/data/userData';
+import hydrationData from '../src/data/hydrationData';
 
 
 describe('Repository', () => {
