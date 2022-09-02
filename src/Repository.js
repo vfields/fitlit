@@ -14,9 +14,9 @@ class Repository {
         if (index === dataArray.length - 1) {
           return (acc + curr) / dataArray.length;
         }
-        acc = acc + curr;
+        acc += curr;
         return acc;
-      }, 0)
+      }, 0);
   }
 }
 
