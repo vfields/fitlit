@@ -7,7 +7,6 @@ class User {
     this.strideLength = userData.strideLength;
     this.dailyStepGoal = userData.dailyStepGoal;
     this.friends = userData.friends;
-    
   }
 
   findUserFirstName() {
@@ -33,6 +32,11 @@ class User {
     const datesOnlyArray = this[dataArray].map(dataObject => dataObject.date);
     return this[dataArray].slice(datesOnlyArray.indexOf(startDate), datesOnlyArray.indexOf(endDate) + 1);
   }
+  calcMiles(date) {
+     let trail = this.findUserDataByDate('2019/06/15', 'activityData') //.numSteps * this.strideLength / 5280
+     return trail
+
+   }
 }
 
 export default User;

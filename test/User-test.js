@@ -4,6 +4,7 @@ import Repository from '../src/Repository';
 import userData from '../src/data/userData';
 import hydrationData from '../src/data/hydrationData';
 import sleepData from '../src/data/sleepData';
+import activityData from '../src/data/activityData';
 
 describe('User', () => {
   it ('should be a function', () => {
@@ -14,12 +15,14 @@ describe('User', () => {
   let user2;
   let hydroRepo;
   let sleepRepo;
+  let activityRepo;
 
   beforeEach(() => {
     user1 = new User(userData[0]);
     user2 = new User(userData[1]);
     hydroRepo = new Repository(hydrationData);
     sleepRepo = new Repository(sleepData);
+    activityRepo = new Repository(activityData);
   });
 
   it ('should represent a single user', () => {
@@ -27,6 +30,8 @@ describe('User', () => {
     expect(user2).to.be.an('object');
     expect(user1.id).to.equal(1);
     expect(user2.id).to.equal(2);
+    user1.setUserData(activityRepo, 'activityData', 'userID')
+    console.log(user1.calcMiles());
   });
 
   it ('should store user properties in each instance from the data', () => {

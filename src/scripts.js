@@ -8,6 +8,7 @@ import User from './User';
 let userRepository;
 let hydrationRepository;
 let sleepRepository;
+let activityRepository;
 let randomUser;
 let timeframe;
 
@@ -25,6 +26,8 @@ function setData(repos) {
   randomUser.setUserData(hydrationRepository, 'hydrationData', 'userID');
   sleepRepository = new Repository(repos[2].sleepData);
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
+  activityRepository = new Repository(repos[3].activityData);
+  randomUser.setUserData(activityRepository, 'activityData', 'userID');
   timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
 
   displayUserData();
