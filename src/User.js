@@ -33,8 +33,8 @@ class User {
     return this[dataArray].slice(datesOnlyArray.indexOf(startDate), datesOnlyArray.indexOf(endDate) + 1);
   }
   calcMiles(date) {
-     let trail = this.findUserDataByDate('2019/06/15', 'activityData') //.numSteps * this.strideLength / 5280
-     return trail
+     const totalDistance = this.findUserDataByDate(date, 'activityData').numSteps * this.strideLength / 5280
+     return Math.round(totalDistance * 100) / 100;
 
    }
 }
