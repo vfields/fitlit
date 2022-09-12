@@ -9,12 +9,11 @@ class Repository {
 
   calcRepoAvg(property) {
     return this.data
-      .map(user => user[property])
       .reduce((acc, curr, index, dataArray) => {
         if (index === dataArray.length - 1) {
-          return (acc + curr) / dataArray.length;
+          return (acc + curr[property]) / dataArray.length;
         }
-        acc += curr;
+        acc += curr[property];
         return acc;
       }, 0);
   }

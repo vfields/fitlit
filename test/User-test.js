@@ -4,6 +4,7 @@ import Repository from '../src/Repository';
 import userData from '../src/data/userData';
 import hydrationData from '../src/data/hydrationData';
 import sleepData from '../src/data/sleepData';
+import activityData from '../src/data/activityData';
 
 describe('User', () => {
   it ('should be a function', () => {
@@ -14,12 +15,14 @@ describe('User', () => {
   let user2;
   let hydroRepo;
   let sleepRepo;
+  let activityRepo;
 
   beforeEach(() => {
     user1 = new User(userData[0]);
     user2 = new User(userData[1]);
     hydroRepo = new Repository(hydrationData);
     sleepRepo = new Repository(sleepData);
+    activityRepo = new Repository(activityData);
   });
 
   it ('should represent a single user', () => {
@@ -27,6 +30,7 @@ describe('User', () => {
     expect(user2).to.be.an('object');
     expect(user1.id).to.equal(1);
     expect(user2.id).to.equal(2);
+
   });
 
   it ('should store user properties in each instance from the data', () => {
@@ -77,5 +81,10 @@ describe('User', () => {
 
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6]]);
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'sleepData')).to.deep.equal([sleepData[0], sleepData[1], sleepData[2], sleepData[3], sleepData[4], sleepData[5], sleepData[6]]);
+  });
+  it ('given a specific date, should return the miles a user has walked based on their number of steps', () => {
+    user1.setUserData(activityRepo, 'activityData', 'userID');
+
+    expect(user1.calcMiles('2019/06/15')).to.equal(2.91);
   });
 });

@@ -32,6 +32,11 @@ class User {
     const datesOnlyArray = this[dataArray].map(dataObject => dataObject.date);
     return this[dataArray].slice(datesOnlyArray.indexOf(startDate), datesOnlyArray.indexOf(endDate) + 1);
   }
+  calcMiles(date) {
+     const totalDistance = this.findUserDataByDate(date, 'activityData').numSteps * this.strideLength / 5280
+     return Math.round(totalDistance * 100) / 100;
+
+   }
 }
 
 export default User;
