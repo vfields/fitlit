@@ -48,7 +48,7 @@ class User {
  */
 
  avgWeeklyMinutesActive(startDate, endDate) {
-   return 'hello';
+   return this.getUserWeeklyData(startDate, endDate, 'activityData');
  }
 
 }
