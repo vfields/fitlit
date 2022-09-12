@@ -12,8 +12,9 @@ let randomUser;
 let timeframe;
 
 // FETCH DATA *****************************************************
-Promise.all([fetchData("users"), fetchData("hydration"), fetchData("sleep")])
+Promise.all([fetchData("users"), fetchData("hydration"), fetchData("sleep"), fetchData("activity")])
   .then((repos) => {
+    console.log(repos[3])
     setData(repos);
   });
 
@@ -25,7 +26,7 @@ function setData(repos) {
   sleepRepository = new Repository(repos[2].sleepData);
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
   timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
- 
+
   displayUserData();
 }
 
@@ -109,7 +110,7 @@ function displayHydrationData() {
   waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
   waterInfo.innerHTML += `
   <p>
-   <span class="water-date">${timeframe}</span>: 
+   <span class="water-date">${timeframe}</span>:
    <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
   </p>
    `;
@@ -121,7 +122,7 @@ function displaySleepWeek() {
   displaySleepDays.forEach((element) => {
   sleepInfo.innerHTML += `
   <p>
-    <span class="sleep-date">${element.date}</span>: 
+    <span class="sleep-date">${element.date}</span>:
     <span class="sleep-amount">${element.hoursSlept}</span> hrs,
     <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality
   </p>
@@ -135,7 +136,7 @@ function displayHyrationWeek() {
   displayHydrationDays.forEach((element) => {
     waterInfo.innerHTML += `
   <p>
-    <span class="water-date">${element.date}</span>: 
+    <span class="water-date">${element.date}</span>:
     <span class="water-amount">${element.numOunces}</span> oz
   </p>
     `;
@@ -145,7 +146,7 @@ function displayHyrationWeek() {
 function setTimeframeDisplays() {
   waterInfo.innerHTML = "";
   sleepInfo.innerHTML = "";
-  
+
   if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
     timeframeDisplay.innerText = timeframe;
     timeframeButtonText.innerText = "WEEKLY";
