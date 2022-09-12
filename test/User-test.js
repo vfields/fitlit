@@ -82,9 +82,18 @@ describe('User', () => {
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6]]);
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'sleepData')).to.deep.equal([sleepData[0], sleepData[1], sleepData[2], sleepData[3], sleepData[4], sleepData[5], sleepData[6]]);
   });
+
   it ('given a specific date, should return the miles a user has walked based on their number of steps', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
     expect(user1.calcMiles('2019/06/15')).to.equal(2.91);
+  });
+
+  it ('this is my test block', () => {
+    user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    user1.setUserData(sleepRepo, 'sleepData', 'userID');
+    user1.setUserData(activityRepo, 'activityData', 'userID');
+    console.log(user1.calcDailyMinutesActive('2019/06/15'));
+    console.log(user1.avgWeeklyMinutesActive());
   });
 });
