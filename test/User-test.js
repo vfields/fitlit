@@ -104,5 +104,9 @@ describe('User', () => {
     console.log(user1.findStepGoalExceededDays());
 
     console.log(user1.findStairClimbingRecord());
+
+    console.log('calcRepoAvgByDate stairs climbed', activityRepo.calcRepoAvgByDate('flightsOfStairs', "2019/06/15"))
+    console.log('calcRepoAvgByDate steps taken', activityRepo.calcRepoAvgByDate('numSteps', "2019/06/15"))
+    console.log('calcRepoAvgByDate minutes active', activityRepo.calcRepoAvgByDate('minutesActive', "2019/06/15"));
   });
 });
