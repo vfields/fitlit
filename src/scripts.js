@@ -1,6 +1,6 @@
 // DEPENDENCIES **************************************************
 import './css/styles.css';
-import fetchData from './apiCalls';
+import { fetchData, postData } from './apiCalls';
 import Repository from './Repository';
 import User from './User';
 
