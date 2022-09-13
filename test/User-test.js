@@ -82,9 +82,31 @@ describe('User', () => {
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'hydrationData')).to.deep.equal([hydrationData[0], hydrationData[1], hydrationData[2], hydrationData[3], hydrationData[4], hydrationData[5], hydrationData[6]]);
     expect(user1.getUserWeeklyData('2019/06/15', '2019/06/21', 'sleepData')).to.deep.equal([sleepData[0], sleepData[1], sleepData[2], sleepData[3], sleepData[4], sleepData[5], sleepData[6]]);
   });
+
   it ('given a specific date, should return the miles a user has walked based on their number of steps', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.calcMiles('2019/06/15')).to.equal(2.91);
+    expect(user1.calcMiles('2019/06/15')).to.equal(3.06);
+  });
+
+  it ('this is my test block', () => {
+    user1.setUserData(hydroRepo, 'hydrationData', 'userID');
+    user1.setUserData(sleepRepo, 'sleepData', 'userID');
+    user1.setUserData(activityRepo, 'activityData', 'userID');
+
+    console.log(user1.calcDailyMinutesActive('2019/06/15'));
+
+    console.log(user1.avgWeeklyMinutesActive("2019/06/15", "2019/06/21"));
+
+    console.log('daily step goal = ', user1.dailyStepGoal, 'so this 3754 step day returns', user1.meetStepGoal("2019/06/15"));
+    console.log('daily step goal = ', user1.dailyStepGoal, 'so this 12000 step day returns', user1.meetStepGoal("2019/06/16"));
+
+    console.log(user1.findStepGoalExceededDays());
+
+    console.log(user1.findStairClimbingRecord());
+
+    console.log('calcRepoAvgByDate stairs climbed', activityRepo.calcRepoAvgByDate('flightsOfStairs', "2019/06/15"))
+    console.log('calcRepoAvgByDate steps taken', activityRepo.calcRepoAvgByDate('numSteps', "2019/06/15"))
+    console.log('calcRepoAvgByDate minutes active', activityRepo.calcRepoAvgByDate('minutesActive', "2019/06/15"));
   });
 });
