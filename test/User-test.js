@@ -93,7 +93,10 @@ describe('User', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
     user1.setUserData(activityRepo, 'activityData', 'userID');
+
     console.log(user1.calcDailyMinutesActive('2019/06/15'));
     console.log(user1.avgWeeklyMinutesActive("2019/06/15", "2019/06/21"));
+    console.log(user1.meetStepGoal("2019/06/15"));
+    console.log(user1.findStepGoalExceededDays());
   });
 });

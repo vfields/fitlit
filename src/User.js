@@ -61,6 +61,17 @@ class User {
 */
 
   }
+
+  meetStepGoal(date) {
+    if (this.findUserDataByDate(date, 'activityData').numSteps >= this.dailyStepGoal) {
+      return true;
+    }
+    return false;
+  }
+
+  findStepGoalExceededDays() {
+    return 'hello';
+  }
 }
 
 export default User;
