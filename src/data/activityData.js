@@ -25,7 +25,7 @@ const activityData = [
     date: "2019/06/18",
     numSteps: 3570,
     minutesActive: 120,
-    flightsOfStairs: 16
+    flightsOfStairs: 20
   },
   {
     userID: 1,

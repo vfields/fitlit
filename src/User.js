@@ -78,6 +78,16 @@ class User {
         return acc;
       }, [])
   }
+
+  findStairClimbingRecord() {
+    return this.activityData
+      .reduce((acc, curr) => {
+        if (acc.flightsOfStairs > curr.flightsOfStairs) {
+          return acc;
+        }
+        return curr;
+      }).flightsOfStairs;
+  }
 }
 
 export default User;
