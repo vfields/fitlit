@@ -13,18 +13,39 @@
       <p>Hello, <span class="user-first-name">USERNAME</span></p>
       <p> Address: <span class="user-address">USERADDRESS</span></p>
       <p> Email: <span class="user-email">USEREMAIL</span></p>
-   
     </header>
+
+
     <section class="friends-section">
       <h2>Friends List</h2>
       <article class="friend-names">
       </article>
     </section>
+    <div class='input-all-data'>
+       <section class='data-box'>
+         <label for="activity-date">Date:</label><br>
+         <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
+         <label for='hoursSlept'>Hours Slept</label>
+         <input class='hoursSlept' name='hoursSlept' size='15' maxlength='100'/>
+         <label for='sleepQuality' id='body'>Sleep Quality</label>
+         <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+         <label for='number-of-steps'>Number of Steps</label>
+         <input class='number-of-steps' name='number-of-steps' size='15' maxlength='100'/>
+         <label for='sleepQuality' id='body'>Sleep Quality</label>
+         <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+         <label for='flights-of-stairs'>Flights of Stairs</label>
+         <input class='flights-of-stairs' name='flights-of-stairs' size='15' maxlength='100'/>
+         <label for='number-of-ounces'>Number of Steps</label>
+         <input class='number-of-ounces' name='number-of-ounces' size='15' maxlength='100'/>
+         <button type='submit' class='saveButton'>Save</button>
+       </section>
+     </div>
     <section class="controls-section">
       <p>Showing data for <span class="timeframe-display">TIMEFRAME</span></p>
       <button class="timeframe-button">
         Show <span class="timeframe-button-text">TIMEFRAME TOGGLE</span> Data
       </button>
+      <button class="update-info">Update Info</button>
     </section>
     <section class="water-section">
       <h3>Water Intake</h3>
