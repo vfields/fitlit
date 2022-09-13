@@ -96,7 +96,8 @@ describe('User', () => {
 
     console.log(user1.calcDailyMinutesActive('2019/06/15'));
     console.log(user1.avgWeeklyMinutesActive("2019/06/15", "2019/06/21"));
-    console.log(user1.meetStepGoal("2019/06/15"));
+    console.log('daily step goal = ', user1.dailyStepGoal, 'so this 3754 step day returns', user1.meetStepGoal("2019/06/15"));
+    console.log('daily step goal = ', user1.dailyStepGoal, 'so this 12000 step day returns', user1.meetStepGoal("2019/06/16"));
     console.log(user1.findStepGoalExceededDays());
   });
 });

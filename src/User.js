@@ -70,7 +70,13 @@ class User {
   }
 
   findStepGoalExceededDays() {
-    return 'hello';
+    return this.activityData
+      .reduce((acc, curr) => {
+        if (this.dailyStepGoal < curr.numSteps) {
+          acc.push(curr.date);
+        }
+        return acc;
+      }, [])
   }
 }
 
