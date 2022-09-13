@@ -13,6 +13,8 @@
       <p>Hello, <span class="user-first-name">USERNAME</span></p>
       <p> Address: <span class="user-address">USERADDRESS</span></p>
       <p> Email: <span class="user-email">USEREMAIL</span></p>
+      <p>Your Minutes Active for <span class="activity-date"> DATE </span> is: <span class="user-active-mins"> Amount</span> Mins</p>
+      <p>Average Daily Minutes Active: <span class="avg-mins">REPOAVGMINS</span> Mins</p>
     </header>
     <section class="friends-section">
       <h2>Friends List</h2>
@@ -42,9 +44,13 @@
     </section>
     <section class="steps-section">
       <h3>Step Goals</h3>
+      <p> <span class="step-date">DATE</span> : <span class="step-amount">Amount</span> steps, <span class="step-distance"> Distance </span> Miles </p>
       <p>Daily Step Goal: <span class="user-step-goal">USERSTEPS</span> steps</p>
       <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal">REPOAVGSTEPS</span> steps</p>
       <p>Stride Length: <span class="user-stride-length">USERSTRIDE</span> ft</p>
+      <p>Average Daily number of steps: <span class="avg-steps">REPOAVGSTEPS</span> steps</p>
+      <p>Average Daily flights of stairs climbed: <span class="avg-stairs">REPOAVGFLIGHTS</span> flights </p>
+      <!-- <p> Distance Walked: </p> -->
     </section>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
