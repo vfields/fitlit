@@ -1,3 +1,5 @@
+import Repository from './Repository';
+
 class User {
   constructor(userData) {
     this.id = userData.id;
@@ -42,15 +44,23 @@ class User {
     return this.findUserDataByDate(date, 'activityData').minutesActive;
   }
 
-  /*
-  For a user, how many minutes active did they average for a
-  given week (7 days)?
- */
-
  avgWeeklyMinutesActive(startDate, endDate) {
-   return this.getUserWeeklyData(startDate, endDate, 'activityData');
- }
+   const weekArray = this.getUserWeeklyData(startDate, endDate, 'activityData');
+   const weekDataRepo = new Repository(weekArray);
+   return Math.round(weekDataRepo.calcRepoAvg('minutesActive') * 100) / 100;
 
+ /* or we can do the below code without importing Reposiory!
+ // we'd just need to add the Math.round bit!
+   return weekArray.reduce((acc, curr, index, dataArray) => {
+     if (index === dataArray.length - 1) {
+       return (acc + curr.minutesActive) / dataArray.length;
+     }
+     acc += curr.minutesActive;
+     return acc;
+   }, 0);
+*/
+
+  }
 }
 
 export default User;

@@ -86,7 +86,7 @@ describe('User', () => {
   it ('given a specific date, should return the miles a user has walked based on their number of steps', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.calcMiles('2019/06/15')).to.equal(2.91);
+    expect(user1.calcMiles('2019/06/15')).to.equal(3.06);
   });
 
   it ('this is my test block', () => {
@@ -94,6 +94,6 @@ describe('User', () => {
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
     user1.setUserData(activityRepo, 'activityData', 'userID');
     console.log(user1.calcDailyMinutesActive('2019/06/15'));
-    console.log(user1.avgWeeklyMinutesActive());
+    console.log(user1.avgWeeklyMinutesActive("2019/06/15", "2019/06/21"));
   });
 });
