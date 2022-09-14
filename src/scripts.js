@@ -29,9 +29,15 @@ function setData(repos) {
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
   timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  console.log('look at the ',timeframe)
+  console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
+  console.log('hydration date', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
+  console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
 
   displayUserData();
 }
+
+
 
 function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
@@ -69,6 +75,14 @@ const sleepAmount = document.querySelector(".sleep-amount");
 const avgSleepQuality = document.querySelector(".avg-sleep-quality");
 const sleepQual = document.querySelector(".sleep-quality");
 
+const userMinutesActive = document.querySelector(".user-active-mins");
+const repoAvgSteps = document.querySelector('.repo-avg-steps');
+const repoAvgStairs = document.querySelector('.repo-avg-stairs');
+const repoAvgMinutes = document.querySelector('.repo-avg-mins');
+const stepDate = document.querySelector('.step-date');
+const userStepAmount = document.querySelector('.user-step-amount');
+const userFlights = document.querySelector('.user-stair-flights');
+const userStepDistance = document.querySelector('.user-step-distance');
 
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
@@ -140,6 +154,35 @@ function displayStepData() {
   userStepGoal.innerText = randomUser.dailyStepGoal;
   repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
   userStrideLength.innerText = randomUser.strideLength;
+  
+  // console.log('this is time frame', timeframe)
+  // console.log('dis'  , randomUser.findUserDataByDate(timeframe,'activityData'))
+  try {
+    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+    stepDate.innerText = timeframe; 
+    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+    userStepDistance.innerText = randomUser.calcMiles(timeframe);
+    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  }
+  catch {
+    alert('You dont have activity data for this day. You will be shown your most recent activity data.')
+    timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
+    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+    stepDate.innerText = timeframe; 
+    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+    userStepDistance.innerText = randomUser.calcMiles(timeframe);
+    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  }
+  finally {
+     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+
+  }
 }
 
 function displayWidgetData() {
