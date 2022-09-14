@@ -75,7 +75,15 @@ const sleepAmount = document.querySelector(".sleep-amount");
 const avgSleepQuality = document.querySelector(".avg-sleep-quality");
 const sleepQual = document.querySelector(".sleep-quality");
 
-const userMinutesActive = document.querySelector(".user-active-mins")
+const userMinutesActive = document.querySelector(".user-active-mins");
+const repoAvgSteps = document.querySelector('.repo-avg-steps');
+const repoAvgStairs = document.querySelector('.repo-avg-stairs');
+const repoAvgMinutes = document.querySelector('.repo-avg-mins');
+const stepDate = document.querySelector('.step-date');
+const userStepAmount = document.querySelector('.user-step-amount');
+const userFlights = document.querySelector('.user-stair-flights');
+const userStepDistance = document.querySelector('.user-step-distance');
+
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
 
@@ -146,16 +154,24 @@ function displayStepData() {
   userStepGoal.innerText = randomUser.dailyStepGoal;
   repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
   userStrideLength.innerText = randomUser.strideLength;
-  console.log('this is time frame', timeframe)
-  console.log('dis'  , randomUser.findUserDataByDate(timeframe,'activityData'))
+  
+  // console.log('this is time frame', timeframe)
+  // console.log('dis'  , randomUser.findUserDataByDate(timeframe,'activityData'))
   try {
+    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+    stepDate.innerText = timeframe; 
+    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+    userStepDistance.innerText = randomUser.calcMiles(timeframe);
     userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
   }
   catch {
     alert('You dont have data for this day. Would you like to see your most recent data?')
   }
   finally {
-
+    
   }
 }
 
