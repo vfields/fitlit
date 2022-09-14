@@ -14,38 +14,35 @@
       <p> Address: <span class="user-address">USERADDRESS</span></p>
       <p> Email: <span class="user-email">USEREMAIL</span></p>
     </header>
-
-
     <section class="friends-section">
       <h2>Friends List</h2>
       <article class="friend-names">
       </article>
     </section>
-    <div class='input-all-data'>
-       <section class='data-box'>
-         <label for="activity-date">Date:</label><br>
-         <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
-         <label for='hoursSlept'>Hours Slept</label>
-         <input class='hoursSlept' name='hoursSlept' size='15' maxlength='100'/>
-         <label for='sleepQuality' id='body'>Sleep Quality</label>
-         <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
-         <label for='number-of-steps'>Number of Steps</label>
-         <input class='number-of-steps' name='number-of-steps' size='15' maxlength='100'/>
-         <label for='sleepQuality' id='body'>Sleep Quality</label>
-         <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
-         <label for='flights-of-stairs'>Flights of Stairs</label>
-         <input class='flights-of-stairs' name='flights-of-stairs' size='15' maxlength='100'/>
-         <label for='number-of-ounces'>Number of Steps</label>
-         <input class='number-of-ounces' name='number-of-ounces' size='15' maxlength='100'/>
-         <button type='submit' class='saveButton'>Save</button>
-       </section>
-     </div>
     <section class="controls-section">
       <p>Showing data for <span class="timeframe-display">TIMEFRAME</span></p>
       <button class="timeframe-button">
         Show <span class="timeframe-button-text">TIMEFRAME TOGGLE</span> Data
       </button>
-      <button class="update-info">Update Info</button>
+      <button class="update-button"><span class="update-button-text">SHOW</span> Update Info Form</button>
+      <p>
+      <article class='data-box hidden'>
+        <label for="activity-date">Date:</label><br>
+        <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
+        <label for='hoursSlept'>Hours Slept</label>
+        <input class='hoursSlept' name='hoursSlept' size='15' maxlength='100'/>
+        <label for='sleepQuality' id='body'>Sleep Quality</label>
+        <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+        <label for='number-of-steps'>Number of Steps</label>
+        <input class='number-of-steps' name='number-of-steps' size='15' maxlength='100'/>
+        <label for='sleepQuality' id='body'>Sleep Quality</label>
+        <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+        <label for='flights-of-stairs'>Flights of Stairs</label>
+        <input class='flights-of-stairs' name='flights-of-stairs' size='15' maxlength='100'/>
+        <label for='number-of-ounces'>Number of Steps</label>
+        <input class='number-of-ounces' name='number-of-ounces' size='15' maxlength='100'/>
+        <button type='submit' class='saveButton'>Save</button>
+      </article>
     </section>
     <section class="water-section">
       <h3>Water Intake</h3>
@@ -64,14 +61,11 @@
     </section>
     <section class="steps-section">
       <h3>Activity</h3>
-      <p> <span class="step-date">DATE</span> : <span class="step-amount">Amount</span> steps, <span class="step-distance"> Distance </span> Miles </p>
+      <p> <span class="step-date">DATE</span>: <span class="step-amount">AMOUNT</span> steps, <span class="step-distance">DISTANCE</span> miles, <span class="user-active-mins">AMOUNT</span> mins active, <span class="user-stair-flights">AMOUNT</span> flights</p>
+      <p>Average ACTIVITY TRACKER Metrics: <span class="repo-avg-steps">REPOAVGSTEPS</span> steps, <span class="repo-avg-stairs">REPOAVGFLIGHTS</span> flights, <span class="repo-avg-mins">REPOAVGMINS</span> mins active</p>
       <p>Daily Step Goal: <span class="user-step-goal">USERSTEPS</span> steps</p>
       <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal">REPOAVGSTEPS</span> steps</p>
       <p>Stride Length: <span class="user-stride-length">USERSTRIDE</span> ft</p>
-      <p>Average Daily number of steps: <span class="avg-steps">REPOAVGSTEPS</span> steps</p>
-      <p>Average Daily flights of stairs climbed: <span class="avg-stairs">REPOAVGFLIGHTS</span> flights </p>
-      <p>Your Minutes Active for <span class="activity-date"> DATE </span> is: <span class="user-active-mins"> Amount</span> Mins</p>
-      <p>Average Daily Minutes Active: <span class="avg-mins">REPOAVGMINS</span> Mins</p>
     </section>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>

@@ -50,6 +50,9 @@ const userFriends = document.querySelector(".friend-names");
 const timeframeDisplay = document.querySelector(".timeframe-display");
 const timeFrameBtn = document.querySelector(".timeframe-button");
 const timeframeButtonText = document.querySelector(".timeframe-button-text");
+const updateInfoBtn = document.querySelector(".update-button")
+const updateInfoBtnText = document.querySelector(".update-button-text")
+const dataForm = document.querySelector(".data-box");
 const waterInfo = document.querySelector(".water-information");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
 const waterDate = document.querySelector(".water-date");
@@ -64,6 +67,15 @@ const sleepQual = document.querySelector(".sleep-quality");
 
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
+updateInfoBtn.addEventListener('click', function() {
+  dataForm.classList.toggle('hidden');
+  if (updateInfoBtnText.innerText === "SHOW") {
+    updateInfoBtnText.innerText = "HIDE";
+  }
+  else {
+    updateInfoBtnText.innerText = "SHOW";
+  }
+})
 
 // EVENT HANDLERS *************************************************
 function displayUserData() {
