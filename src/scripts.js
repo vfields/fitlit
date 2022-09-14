@@ -168,10 +168,20 @@ function displayStepData() {
     userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
   }
   catch {
-    alert('You dont have data for this day. Would you like to see your most recent data?')
+    alert('You dont have activity data for this day. You will be shown your most recent activity data.')
+    timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
+    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+    stepDate.innerText = timeframe; 
+    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+    userStepDistance.innerText = randomUser.calcMiles(timeframe);
+    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
   }
   finally {
-    
+     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+
   }
 }
 
