@@ -50,9 +50,15 @@ const userFriends = document.querySelector(".friend-names");
 const timeframeDisplay = document.querySelector(".timeframe-display");
 const timeFrameBtn = document.querySelector(".timeframe-button");
 const timeframeButtonText = document.querySelector(".timeframe-button-text");
-const updateInfoBtn = document.querySelector(".update-button")
-const updateInfoBtnText = document.querySelector(".update-button-text")
+const updateInfoBtn = document.querySelector(".update-button");
+const updateInfoBtnText = document.querySelector(".update-button-text");
+
 const dataForm = document.querySelector(".data-box");
+const dataChoices = document.querySelector(".data-choices");
+const waterFormDisplays = document.querySelectorAll(".water-form");
+const sleepFormDisplays = document.querySelectorAll(".sleep-form");
+const activityFormDisplays = document.querySelectorAll(".activity-form");
+
 const waterInfo = document.querySelector(".water-information");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
 const waterDate = document.querySelector(".water-date");
@@ -67,6 +73,7 @@ const sleepQual = document.querySelector(".sleep-quality");
 
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
+
 updateInfoBtn.addEventListener('click', function() {
   dataForm.classList.toggle('hidden');
   if (updateInfoBtnText.innerText === "SHOW") {
@@ -74,6 +81,42 @@ updateInfoBtn.addEventListener('click', function() {
   }
   else {
     updateInfoBtnText.innerText = "SHOW";
+  }
+})
+
+dataChoices.addEventListener('change', function() {
+  if (dataChoices.selectedIndex === 0) { //water
+    Array.from(waterFormDisplays).forEach(display => {
+      display.classList.remove('hidden');
+    })
+    Array.from(sleepFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+    Array.from(activityFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+  }
+  else if (dataChoices.selectedIndex === 1) { //sleep
+    Array.from(waterFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+    Array.from(sleepFormDisplays).forEach(display => {
+      display.classList.remove('hidden');
+    })
+    Array.from(activityFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+  }
+  else if (dataChoices.selectedIndex === 2) { //activity
+    Array.from(waterFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+    Array.from(sleepFormDisplays).forEach(display => {
+      display.classList.add('hidden');
+    })
+    Array.from(activityFormDisplays).forEach(display => {
+      display.classList.remove('hidden');
+    })
   }
 })
 
