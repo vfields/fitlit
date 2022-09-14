@@ -50,6 +50,14 @@ const userFriends = document.querySelector(".friend-names");
 const timeframeDisplay = document.querySelector(".timeframe-display");
 const timeFrameBtn = document.querySelector(".timeframe-button");
 const timeframeButtonText = document.querySelector(".timeframe-button-text");
+const updateInfoBtn = document.querySelector(".update-button");
+const updateInfoBtnText = document.querySelector(".update-button-text");
+
+const dataForm = document.querySelector(".data-box");
+const dataChoices = document.querySelector(".data-choices");
+const waterFormDisplays = Array.from(document.querySelectorAll(".water-form"));
+const sleepFormDisplays = Array.from(document.querySelectorAll(".sleep-form"));
+const activityFormDisplays = Array.from(document.querySelectorAll(".activity-form"));
 const waterInfo = document.querySelector(".water-information");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
 const waterDate = document.querySelector(".water-date");
@@ -64,6 +72,52 @@ const sleepQual = document.querySelector(".sleep-quality");
 
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
+
+updateInfoBtn.addEventListener('click', function() {
+  dataForm.classList.toggle('hidden');
+  if (updateInfoBtnText.innerText === "SHOW") {
+    updateInfoBtnText.innerText = "HIDE";
+  }
+  else {
+    updateInfoBtnText.innerText = "SHOW";
+  }
+})
+
+dataChoices.addEventListener('change', function() {
+  if (dataChoices.selectedIndex === 0) { //water
+    waterFormDisplays.forEach(display => {
+      display.classList.remove('hidden');
+    })
+    sleepFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+    activityFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+  }
+  else if (dataChoices.selectedIndex === 1) { //sleep
+    waterFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+    sleepFormDisplays.forEach(display => {
+      display.classList.remove('hidden');
+    })
+    activityFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+  }
+  else if (dataChoices.selectedIndex === 2) { //activity
+    waterFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+    sleepFormDisplays.forEach(display => {
+      display.classList.add('hidden');
+    })
+    activityFormDisplays.forEach(display => {
+      display.classList.remove('hidden');
+    })
+  }
+})
 
 // EVENT HANDLERS *************************************************
 function displayUserData() {

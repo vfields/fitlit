@@ -71,6 +71,10 @@ header {
   grid-column: span 2;
 }
 
+.hidden {
+  display: none;
+}
+
 /* SHARED WIDGET PROPERTIES **************************** */
 
 header,
