@@ -27,20 +27,24 @@
       <button class="update-button"><span class="update-button-text">SHOW</span> Update Info Form</button>
       <p>
       <article class='data-box hidden'>
-        <label for="activity-date">Date:</label><br>
+        <label for="data-choice">Choose Activity Type:</label>
+          <select name="data-choices" id="data-choices">
+            <option value="water-data" selected>Water Data</option>
+            <option value="sleep-data">Sleep Data</option>
+            <option value="activity-data">Activity Data</option>
+          </select>
+        <label for="activity-date">Date:</label>
         <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
+        <label for='waterIntake' id='body'>Water Intake (ounces)</label>
+        <input class='waterIntake' name='waterIntake' placeholder="32" size='15' maxlength='100'/>
         <label for='hoursSlept'>Hours Slept</label>
-        <input class='hoursSlept' name='hoursSlept' size='15' maxlength='100'/>
+        <input class='hoursSlept' name='hoursSlept' placeholder="8" size='15' maxlength='100'/>
         <label for='sleepQuality' id='body'>Sleep Quality</label>
-        <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+        <input class='sleepQuality' name='sleepQuality' placeholder="4" size='15' maxlength='100'/>
         <label for='number-of-steps'>Number of Steps</label>
-        <input class='number-of-steps' name='number-of-steps' size='15' maxlength='100'/>
-        <label for='sleepQuality' id='body'>Sleep Quality</label>
-        <input class='sleepQuality' name='sleepQuality' size='15' maxlength='100'/>
+        <input class='number-of-steps' name='number-of-steps' placeholder="5000" size='15' maxlength='100'/>
         <label for='flights-of-stairs'>Flights of Stairs</label>
-        <input class='flights-of-stairs' name='flights-of-stairs' size='15' maxlength='100'/>
-        <label for='number-of-ounces'>Number of Steps</label>
-        <input class='number-of-ounces' name='number-of-ounces' size='15' maxlength='100'/>
+        <input class='flights-of-stairs' name='flights-of-stairs' placeholder="15" size='15' maxlength='100'/>
         <button type='submit' class='saveButton'>Save</button>
       </article>
     </section>
