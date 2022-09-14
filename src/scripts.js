@@ -55,9 +55,9 @@ const updateInfoBtnText = document.querySelector(".update-button-text");
 
 const dataForm = document.querySelector(".data-box");
 const dataChoices = document.querySelector(".data-choices");
-const waterFormDisplays = document.querySelectorAll(".water-form");
-const sleepFormDisplays = document.querySelectorAll(".sleep-form");
-const activityFormDisplays = document.querySelectorAll(".activity-form");
+const waterFormDisplays = Array.from(document.querySelectorAll(".water-form"));
+const sleepFormDisplays = Array.from(document.querySelectorAll(".sleep-form"));
+const activityFormDisplays = Array.from(document.querySelectorAll(".activity-form"));
 
 const waterInfo = document.querySelector(".water-information");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
@@ -86,35 +86,35 @@ updateInfoBtn.addEventListener('click', function() {
 
 dataChoices.addEventListener('change', function() {
   if (dataChoices.selectedIndex === 0) { //water
-    Array.from(waterFormDisplays).forEach(display => {
+    waterFormDisplays.forEach(display => {
       display.classList.remove('hidden');
     })
-    Array.from(sleepFormDisplays).forEach(display => {
+    sleepFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
-    Array.from(activityFormDisplays).forEach(display => {
+    activityFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
   }
   else if (dataChoices.selectedIndex === 1) { //sleep
-    Array.from(waterFormDisplays).forEach(display => {
+    waterFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
-    Array.from(sleepFormDisplays).forEach(display => {
+    sleepFormDisplays.forEach(display => {
       display.classList.remove('hidden');
     })
-    Array.from(activityFormDisplays).forEach(display => {
+    activityFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
   }
   else if (dataChoices.selectedIndex === 2) { //activity
-    Array.from(waterFormDisplays).forEach(display => {
+    waterFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
-    Array.from(sleepFormDisplays).forEach(display => {
+    sleepFormDisplays.forEach(display => {
       display.classList.add('hidden');
     })
-    Array.from(activityFormDisplays).forEach(display => {
+    activityFormDisplays.forEach(display => {
       display.classList.remove('hidden');
     })
   }
