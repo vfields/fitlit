@@ -58,7 +58,6 @@ const dataChoices = document.querySelector(".data-choices");
 const waterFormDisplays = Array.from(document.querySelectorAll(".water-form"));
 const sleepFormDisplays = Array.from(document.querySelectorAll(".sleep-form"));
 const activityFormDisplays = Array.from(document.querySelectorAll(".activity-form"));
-
 const waterInfo = document.querySelector(".water-information");
 const avgWaterAmount = document.querySelector(".avg-water-amount");
 const waterDate = document.querySelector(".water-date");
