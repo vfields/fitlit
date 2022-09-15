@@ -93,8 +93,15 @@ const userStepDistance = document.querySelector('.user-step-distance');
 const waterTimeFrameBtn = document.querySelector(".water-timeframe-button");
 const waterTimeframeBtnText = document.querySelector(".water-timeframe-button-text");
 
+const sleepTimeFrameBtn = document.querySelector(".sleep-timeframe-button");
+const sleepTimeframeBtnText = document.querySelector(".sleep-timeframe-button-text");
+
+const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button");
+const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
+
 // EVENT LISTENERS ************************************************
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
+sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 
 
 
@@ -179,18 +186,17 @@ function displayUserInfo() {
 }
 
 function displayStepData() {
-  userStepGoal.innerText = randomUser.dailyStepGoal;
-  repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
-  userStrideLength.innerText = randomUser.strideLength;
-  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
-  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
-  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
   stepDate.innerText = activityDataDate;
   userStepAmount.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps;
   userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
-  userStepDistance.innerText = randomUser.calcMiles(activityDataDate);
   userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
-
+  userStrideLength.innerText = randomUser.strideLength;
+  userStepDistance.innerText = randomUser.calcMiles(activityDataDate);
+  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
+  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
+  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
+  userStepGoal.innerText = randomUser.dailyStepGoal;
+  repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
   // console.log('timeframe, or most recent water date', timeframe);
   // console.log('most recent activity date:', randomUser.activityData[randomUser.activityData.length - 1].date);
   // console.log('most recent sleep date:', randomUser.sleepData[randomUser.sleepData.length - 1].date);
@@ -262,20 +268,6 @@ function displayHydrationData() {
   avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
 }
 
-function displaySleepWeek() {
-  let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 7].date,
-    randomUser.sleepData[randomUser.sleepData.length - 1].date, 'sleepData');
-  displaySleepDays.forEach((element) => {
-  sleepInfo.innerHTML += `
-  <p>
-    <span class="sleep-date">${element.date}</span>:
-    <span class="sleep-amount">${element.hoursSlept}</span> hrs,
-    <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality
-  </p>
-    `;
-  });
-}
-
 // this function could determine 'today', the most recent dates of all three repos
 function setTimeframeDisplays() {
   if (hydrationDataDate === sleepDataDate && sleepDataDate === activityDataDate) {
@@ -292,9 +284,25 @@ function setTimeframeDisplays() {
   }
 }
 
+function setWaterBtnDisplays() {
+  waterInfo.innerHTML = "";
+  if (waterTimeframeBtnText.innerText === "WEEKLY") {
+    waterTimeframeBtnText.innerText = "MOST RECENT";
+    displayHydrationWeek()
+  } else {
+    waterTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    waterInfo.innerHTML += `
+    <p>
+     <span class="water-date">${hydrationDataDate}</span>:
+     <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+    </p>
+     `;
+  }
+}
+
 function displayHydrationWeek() {
   let displayHydrationDays = randomUser.getUserWeeklyData(randomUser.hydrationData[randomUser.hydrationData.length - 7].date,
-    randomUser.hydrationData[randomUser.hydrationData.length - 1].date, 'hydrationData');
+    hydrationDataDate, 'hydrationData');
   displayHydrationDays.forEach((element) => {
     waterInfo.innerHTML += `
   <p>
@@ -305,20 +313,35 @@ function displayHydrationWeek() {
   });
 }
 
-function setWaterBtnDisplays() {
-  waterInfo.innerHTML = "";
-  if (waterTimeframeBtnText.innerText === "WEEKLY") {
-    waterTimeframeBtnText.innerText = "MOST RECENT";
-    displayHydrationWeek()
+function setSleepBtnDisplays() {
+  sleepInfo.innerHTML = "";
+  if (sleepTimeframeBtnText.innerText === "WEEKLY") {
+    sleepTimeframeBtnText.innerText = "MOST RECENT";
+    displaySleepWeek()
   } else {
-    waterTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a dynamic fnc that can handle ANY repo MOST RECENT (we could do this for weekly, too, with those repoDataDates!)
-    waterInfo.innerHTML += `
+    sleepTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    sleepInfo.innerHTML += `
     <p>
-     <span class="water-date">${hydrationDataDate}</span>:
-     <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+     <span class="sleep-date">${sleepDataDate}</span>:
+     <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
+     <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
     </p>
-     `;
+    `
   }
+}
+
+function displaySleepWeek() {
+  let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 7].date,
+    sleepDataDate, 'sleepData');
+  displaySleepDays.forEach((element) => {
+  sleepInfo.innerHTML += `
+  <p>
+    <span class="sleep-date">${element.date}</span>:
+    <span class="sleep-amount">${element.hoursSlept}</span> hrs,
+    <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality
+  </p>
+    `;
+  });
 }
 
 // function setTimeframeDisplays() {
