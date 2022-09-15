@@ -10,12 +10,16 @@ let hydrationRepository;
 let sleepRepository;
 let activityRepository;
 let randomUser;
-let timeframe;
+
+// let timeframe; - instead, could use three distinct dates
+
+let hydrationDataDate;
+let sleepDataDate;
+let activityDataDate;
 
 // FETCH DATA *****************************************************
 Promise.all([fetchData("users"), fetchData("hydration"), fetchData("sleep"), fetchData("activity")])
   .then((repos) => {
-    console.log(repos[3])
     setData(repos);
   });
 
@@ -28,16 +32,18 @@ function setData(repos) {
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
-  timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  console.log('look at the ',timeframe)
+  findDate();
+
+  // timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // timeframe was equal to the hydration date;
+
+  console.log('hydration date AND timeframe', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
   console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
-  console.log('hydration date', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
   console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
+  console.log('not only are these dates not always the same, the water and sleep dates are also sometimes different ')
 
   displayUserData();
 }
-
-
 
 function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
@@ -54,8 +60,8 @@ const repoStepGoal = document.querySelector(".repo-step-goal");
 const userStrideLength = document.querySelector(".user-stride-length");
 const userFriends = document.querySelector(".friend-names");
 const timeframeDisplay = document.querySelector(".timeframe-display");
-const timeFrameBtn = document.querySelector(".timeframe-button");
-const timeframeButtonText = document.querySelector(".timeframe-button-text");
+// const timeFrameBtn = document.querySelector(".timeframe-button");
+// const timeframeButtonText = document.querySelector(".timeframe-button-text");
 const updateInfoBtn = document.querySelector(".update-button");
 const updateInfoBtnText = document.querySelector(".update-button-text");
 
@@ -84,8 +90,21 @@ const userStepAmount = document.querySelector('.user-step-amount');
 const userFlights = document.querySelector('.user-stair-flights');
 const userStepDistance = document.querySelector('.user-step-distance');
 
+// these are the new DOM elements I made to implement this logic
+const waterTimeFrameBtn = document.querySelector(".water-timeframe-button");
+const waterTimeframeBtnText = document.querySelector(".water-timeframe-button-text");
+
+const sleepTimeFrameBtn = document.querySelector(".sleep-timeframe-button");
+const sleepTimeframeBtnText = document.querySelector(".sleep-timeframe-button-text");
+
+const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button");
+const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
+const activityInfo = document.querySelector(".activity-information") // I put the info we wanted to change for weekly display in an article in the index file
+
 // EVENT LISTENERS ************************************************
-timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
+waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
+sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
+activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
 
 updateInfoBtn.addEventListener('click', function() {
   dataForm.classList.toggle('hidden');
@@ -134,10 +153,27 @@ dataChoices.addEventListener('change', function() {
 })
 
 // EVENT HANDLERS *************************************************
+
+// could determine if the dates are the same; could also use these repoDataDate variables in our other functions
+function findDate() {
+  hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  sleepDataDate = randomUser.sleepData[randomUser.sleepData.length - 1].date;
+  activityDataDate = randomUser.activityData[randomUser.activityData.length - 1].date;
+
+  if (hydrationDataDate !== sleepDataDate && sleepDataDate !== activityDataDate) {
+    alert(`You don't have data available for today in all categories. You will be shown your most recent data instead.`)
+  }
+}
+
 function displayUserData() {
   displayUserInfo();
   displayStepData();
-  displayWidgetData();
+
+  // displayWidgetData(); could move widget data into repsective repo displays (was just sleep and water avg data)
+
+  displaySleepData();
+  displayHydrationData();
+  setTimeframeDisplays();
 }
 
 function displayUserInfo() {
@@ -151,74 +187,153 @@ function displayUserInfo() {
 }
 
 function displayStepData() {
+  stepDate.innerText = activityDataDate;
+  userStepAmount.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps;
+  userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
+  userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
+  userStrideLength.innerText = randomUser.strideLength;
+  userStepDistance.innerText = randomUser.calcMiles(activityDataDate);
+  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
+  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
+  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
   userStepGoal.innerText = randomUser.dailyStepGoal;
   repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
-  userStrideLength.innerText = randomUser.strideLength;
-  
-  // console.log('this is time frame', timeframe)
-  // console.log('dis'  , randomUser.findUserDataByDate(timeframe,'activityData'))
-  try {
-    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
-    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
-    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
-    stepDate.innerText = timeframe; 
-    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
-    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
-    userStepDistance.innerText = randomUser.calcMiles(timeframe);
-    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
-  }
-  catch {
-    alert('You dont have activity data for this day. You will be shown your most recent activity data.')
-    timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
-    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
-    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
-    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
-    stepDate.innerText = timeframe; 
-    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
-    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
-    userStepDistance.innerText = randomUser.calcMiles(timeframe);
-    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
-  }
-  finally {
-     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // console.log('timeframe, or most recent water date', timeframe);
+  // console.log('most recent activity date:', randomUser.activityData[randomUser.activityData.length - 1].date);
+  // console.log('most recent sleep date:', randomUser.sleepData[randomUser.sleepData.length - 1].date);
 
-  }
+  // try {
+  //   repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+  //   repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+  //   repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+  //   stepDate.innerText = timeframe;
+  //   userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+  //   userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+  //   userStepDistance.innerText = randomUser.calcMiles(timeframe);
+  //   userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  // }
+  // catch {
+  //   alert(`You dont have activity data for ${timeframe}. You will be shown your most recent activity data.`)
+  //   timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
+  //   repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+  //   repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+  //   repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+  //   stepDate.innerText = timeframe;
+  //   userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+  //   userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+  //   userStepDistance.innerText = randomUser.calcMiles(timeframe);
+  //   userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  // }
+  // finally {
+  //    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // }
 }
 
-function displayWidgetData() {
-  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
-  avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
-  avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
-  setTimeframeDisplays();
-}
+// function displayWidgetData() {
+  // avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+  // avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
+  // avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
+  // setTimeframeDisplays();
+// }
 
 function displaySleepData() {
-  sleepDate.innerText = timeframe;
+  sleepDate.innerText = sleepDataDate; //instead of timeframe
   sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
   sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
-  sleepInfo.innerHTML += `
-  <p>
-   <span class="sleep-date">${timeframe}</span>:
-   <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
-   <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
-  </p>
-   `;
+
+  // could handle this display change with respective repo weekly/most recent btns
+  // sleepInfo.innerHTML += `
+  // <p>
+  //  <span class="sleep-date">${sleepDataDate}</span>:
+  //  <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
+  //  <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
+  // </p>
+  //  `;
+
+  // here is displayWidgetData for sleep
+   avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
+   avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
 }
 
 function displayHydrationData() {
-  waterDate.innerText = timeframe;
+  waterDate.innerText = hydrationDataDate; //instead of timeframe
   waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
-  waterInfo.innerHTML += `
+
+  // could handle this display change with respective repo weekly/most recent btns
+  // waterInfo.innerHTML += `
+  // <p>
+  //  <span class="water-date">${hydrationDataDate}</span>:
+  //  <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+  // </p>
+  //  `;
+  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+}
+
+// this function could determine 'today', the most recent dates of all three repos
+function setTimeframeDisplays() {
+  if (hydrationDataDate === sleepDataDate && sleepDataDate === activityDataDate) {
+    timeframeDisplay.innerText = hydrationDataDate;
+  }
+  else if (hydrationDataDate > sleepDataDate && hydrationDataDate > activityDataDate) {
+    timeframeDisplay.innerText = hydrationDataDate;
+  }
+  else if (sleepDataDate > hydrationDataDate && sleepDataDate > activityDataDate) {
+    timeframeDisplay.innerText = sleepDataDate;
+  }
+  else {
+    timeframeDisplay.innerText = activityDataDate;
+  }
+}
+
+function setWaterBtnDisplays() {
+  waterInfo.innerHTML = "";
+  if (waterTimeframeBtnText.innerText === "WEEKLY") {
+    waterTimeframeBtnText.innerText = "MOST RECENT";
+    displayHydrationWeek()
+  } else {
+    waterTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    waterInfo.innerHTML += `
+    <p>
+     <span class="water-date">${hydrationDataDate}</span>:
+     <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+    </p>
+     `;
+  }
+}
+
+function displayHydrationWeek() {
+  let displayHydrationDays = randomUser.getUserWeeklyData(randomUser.hydrationData[randomUser.hydrationData.length - 7].date,
+    hydrationDataDate, 'hydrationData');
+  displayHydrationDays.forEach((element) => {
+    waterInfo.innerHTML += `
   <p>
-   <span class="water-date">${timeframe}</span>:
-   <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+    <span class="water-date">${element.date}</span>:
+    <span class="water-amount">${element.numOunces}</span> oz
   </p>
-   `;
+    `;
+  });
+}
+
+function setSleepBtnDisplays() {
+  sleepInfo.innerHTML = "";
+  if (sleepTimeframeBtnText.innerText === "WEEKLY") {
+    sleepTimeframeBtnText.innerText = "MOST RECENT";
+    displaySleepWeek()
+  } else {
+    sleepTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    sleepInfo.innerHTML += `
+    <p>
+     <span class="sleep-date">${sleepDataDate}</span>:
+     <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
+     <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
+    </p>
+    `
+  }
 }
 
 function displaySleepWeek() {
   let displaySleepDays = randomUser.getUserWeeklyData(randomUser.sleepData[randomUser.sleepData.length - 7].date,
-    randomUser.sleepData[randomUser.sleepData.length - 1].date, 'sleepData');
+    sleepDataDate, 'sleepData');
   displaySleepDays.forEach((element) => {
   sleepInfo.innerHTML += `
   <p>
@@ -230,41 +345,62 @@ function displaySleepWeek() {
   });
 }
 
-function displayHyrationWeek() {
-  let displayHydrationDays = randomUser.getUserWeeklyData(randomUser.hydrationData[randomUser.hydrationData.length - 7].date,
-    randomUser.hydrationData[randomUser.hydrationData.length - 1].date, 'hydrationData');
-  displayHydrationDays.forEach((element) => {
-    waterInfo.innerHTML += `
+function setActivityBtnDisplays() {
+  activityInfo.innerHTML = "";
+  if (activityTimeframeBtnText.innerText === "WEEKLY") {
+    activityTimeframeBtnText.innerText = "MOST RECENT";
+    displayActivityWeek()
+  } else {
+    activityTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    activityInfo.innerHTML += `
+    <p>
+     <span class="step-date">${activityDataDate}</span>: <span class="user-step-amount">${randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps}</span> steps, <span class="user-stair-flights">${randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs}</span> flights, <span class="user-active-mins">${randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive}</span> mins active
+    </p>
+    <p>
+      Given your <span class="user-stride-length">${randomUser.strideLength}</span> ft stride length, you walked <span class="user-step-distance">${randomUser.calcMiles(activityDataDate)}</span> miles today!
+    </p>
+    `
+  }
+}
+
+function displayActivityWeek() {
+  let displayActivityDays = randomUser.getUserWeeklyData(randomUser.activityData[randomUser.activityData.length - 7].date,
+    activityDataDate, 'activityData');
+  displayActivityDays.forEach((element) => {
+    // this activityInfo needs to be refactored for activity info, just threw it in here to demonstrate!
+  activityInfo.innerHTML += `
   <p>
-    <span class="water-date">${element.date}</span>:
-    <span class="water-amount">${element.numOunces}</span> oz
+    <span class="step-date">${element.date}</span>:
+    <span class="user-step-amount">${element.numSteps}</span> steps,
+    <span class="user-stair-flights">${element.flightsOfStairs}</span> flights,
+    <span class="user-active-mins">${element.minutesActive}</span> mins active</p>
   </p>
     `;
   });
 }
 
-function setTimeframeDisplays() {
-  waterInfo.innerHTML = "";
-  sleepInfo.innerHTML = "";
-
-  if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
-    timeframeDisplay.innerText = timeframe;
-    timeframeButtonText.innerText = "WEEKLY";
-    displaySleepData();
-    displayHydrationData();
-  } else {
-    timeframeButtonText.innerText = "TODAY'S";
-    displayHyrationWeek();
-    displaySleepWeek();
-  }
-}
-
-
-function displayWeeklyTimeFrames() {
-  if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
-    timeframe = 0;
-  } else {
-    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  }
-  setTimeframeDisplays();
-}
+// function setTimeframeDisplays() {
+//   waterInfo.innerHTML = "";
+//   sleepInfo.innerHTML = "";
+//
+//   if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+//     timeframeDisplay.innerText = timeframe;
+//     timeframeButtonText.innerText = "WEEKLY";
+//     displaySleepData();
+//     displayHydrationData();
+//   } else {
+//     timeframeButtonText.innerText = "TODAY'S";
+//     displayHyrationWeek();
+//     displaySleepWeek();
+//   }
+// }
+//
+//
+// function displayWeeklyTimeFrames() {
+//   if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+//     timeframe = 0;
+//   } else {
+//     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+//   }
+//   setTimeframeDisplays();
+// }
