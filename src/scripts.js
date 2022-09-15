@@ -90,6 +90,7 @@ const userStepAmount = document.querySelector('.user-step-amount');
 const userFlights = document.querySelector('.user-stair-flights');
 const userStepDistance = document.querySelector('.user-step-distance');
 
+// these are the new DOM elements I made to implement this logic
 const waterTimeFrameBtn = document.querySelector(".water-timeframe-button");
 const waterTimeframeBtnText = document.querySelector(".water-timeframe-button-text");
 
@@ -98,11 +99,12 @@ const sleepTimeframeBtnText = document.querySelector(".sleep-timeframe-button-te
 
 const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button");
 const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
+const activityInfo = document.querySelector(".activity-information") // I put the info we wanted to change for weekly display in an article in the index file
 
 // EVENT LISTENERS ************************************************
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
-
+activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
 
 
 updateInfoBtn.addEventListener('click', function() {
@@ -335,6 +337,39 @@ function displaySleepWeek() {
     sleepDataDate, 'sleepData');
   displaySleepDays.forEach((element) => {
   sleepInfo.innerHTML += `
+  <p>
+    <span class="sleep-date">${element.date}</span>:
+    <span class="sleep-amount">${element.hoursSlept}</span> hrs,
+    <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality
+  </p>
+    `;
+  });
+}
+
+function setActivityBtnDisplays() {
+  activityInfo.innerHTML = "";
+  if (activityTimeframeBtnText.innerText === "WEEKLY") {
+    activityTimeframeBtnText.innerText = "MOST RECENT";
+    displayActivityWeek()
+  } else {
+    activityTimeframeBtnText.innerText = "WEEKLY"; // could handle the display chng here, or we could make a separate fnc; could attempt a dynamic fnc as well
+    activityInfo.innerHTML += `
+    <p>
+     <span class="step-date">${activityDataDate}</span>: <span class="user-step-amount">${randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps}</span> steps, <span class="user-stair-flights">${randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs}</span> flights, <span class="user-active-mins">${randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive}</span> mins active
+    </p>
+    <p>
+      Given your <span class="user-stride-length">${randomUser.strideLength}</span> ft stride length, you walked <span class="user-step-distance">${randomUser.calcMiles(activityDataDate)}</span> miles today!
+    </p>
+    `
+  }
+}
+
+function displayActivityWeek() {
+  let displayActivityDays = randomUser.getUserWeeklyData(randomUser.activityData[randomUser.activityData.length - 7].date,
+    activityDataDate, 'activityData');
+  displayActivityDays.forEach((element) => {
+    // this activityInfo needs to be refactored for activity info, just threw it in here to demonstrate!
+  activityInfo.innerHTML += `
   <p>
     <span class="sleep-date">${element.date}</span>:
     <span class="sleep-amount">${element.hoursSlept}</span> hrs,
