@@ -33,10 +33,15 @@ function setData(repos) {
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
   findDate();
+
   // timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  // console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
-  // console.log('hydration date AND timeframe', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
-  // console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
+  // timeframe was equal to the hydration date;
+
+  console.log('hydration date AND timeframe', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
+  console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
+  console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
+  console.log('not only are these dates not always the same, the water and sleep dates are also sometimes different ')
+
   displayUserData();
 }
 
