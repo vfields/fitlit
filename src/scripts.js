@@ -106,7 +106,6 @@ waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
 
-
 updateInfoBtn.addEventListener('click', function() {
   dataForm.classList.toggle('hidden');
   if (updateInfoBtnText.innerText === "SHOW") {
@@ -371,9 +370,10 @@ function displayActivityWeek() {
     // this activityInfo needs to be refactored for activity info, just threw it in here to demonstrate!
   activityInfo.innerHTML += `
   <p>
-    <span class="sleep-date">${element.date}</span>:
-    <span class="sleep-amount">${element.hoursSlept}</span> hrs,
-    <span class="sleep-quality"> ${element.sleepQuality}</span>/5 Quality
+    <span class="step-date">${element.date}</span>:
+    <span class="user-step-amount">${element.numSteps}</span> steps,
+    <span class="user-stair-flights">${element.flightsOfStairs}</span> flights,
+    <span class="user-active-mins">${element.minutesActive}</span> mins active</p>
   </p>
     `;
   });
