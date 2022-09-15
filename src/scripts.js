@@ -12,10 +12,14 @@ let activityRepository;
 let randomUser;
 let timeframe;
 
+let hydrationDataDate;
+let sleepDataDate;
+let activityDataDate;
+
 // FETCH DATA *****************************************************
 Promise.all([fetchData("users"), fetchData("hydration"), fetchData("sleep"), fetchData("activity")])
   .then((repos) => {
-    console.log(repos[3])
+    // console.log(repos[3])
     setData(repos);
   });
 
@@ -28,16 +32,14 @@ function setData(repos) {
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
-  timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  console.log('look at the ',timeframe)
-  console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
-  console.log('hydration date', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
-  console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
-
+  findDate();
+  // timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // console.log('look at the ',timeframe)
+  // console.log('activity date ',randomUser.activityData[randomUser.activityData.length - 1].date)
+  // console.log('hydration date AND timeframe', randomUser.hydrationData[randomUser.hydrationData.length - 1].date)
+  // console.log('sleep date', randomUser.sleepData[randomUser.sleepData.length - 1].date)
   displayUserData();
 }
-
-
 
 function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
@@ -85,7 +87,7 @@ const userFlights = document.querySelector('.user-stair-flights');
 const userStepDistance = document.querySelector('.user-step-distance');
 
 // EVENT LISTENERS ************************************************
-timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
+// timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
 
 updateInfoBtn.addEventListener('click', function() {
   dataForm.classList.toggle('hidden');
@@ -134,10 +136,26 @@ dataChoices.addEventListener('change', function() {
 })
 
 // EVENT HANDLERS *************************************************
+
+function findDate() {
+  hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  sleepDataDate = randomUser.sleepData[randomUser.sleepData.length - 1].date;
+  activityDataDate = randomUser.activityData[randomUser.activityData.length - 1].date;
+
+  if (hydrationDataDate !== sleepDataDate && sleepDataDate !== activityDataDate) {
+    alert(`You don't have data available for today in all categories. You will be shown your most recent data instead.`)
+  }
+}
+
 function displayUserData() {
   displayUserInfo();
   displayStepData();
-  displayWidgetData();
+
+  // displayWidgetData();
+
+  displaySleepData();
+  displayHydrationData();
+  setTimeframeDisplays();
 }
 
 function displayUserInfo() {
@@ -154,66 +172,78 @@ function displayStepData() {
   userStepGoal.innerText = randomUser.dailyStepGoal;
   repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
   userStrideLength.innerText = randomUser.strideLength;
+  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
+  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
+  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
+  stepDate.innerText = activityDataDate;
+  userStepAmount.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps;
+  userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
+  userStepDistance.innerText = randomUser.calcMiles(activityDataDate);
+  userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
 
-  // console.log('this is time frame', timeframe)
-  // console.log('dis'  , randomUser.findUserDataByDate(timeframe,'activityData'))
-  try {
-    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
-    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
-    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
-    stepDate.innerText = timeframe;
-    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
-    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
-    userStepDistance.innerText = randomUser.calcMiles(timeframe);
-    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
-  }
-  catch {
-    alert('You dont have activity data for this day. You will be shown your most recent activity data.')
-    timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
-    repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
-    repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
-    repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
-    stepDate.innerText = timeframe;
-    userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
-    userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
-    userStepDistance.innerText = randomUser.calcMiles(timeframe);
-    userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
-  }
-  finally {
-     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // console.log('timeframe, or most recent water date', timeframe);
+  // console.log('most recent activity date:', randomUser.activityData[randomUser.activityData.length - 1].date);
+  // console.log('most recent sleep date:', randomUser.sleepData[randomUser.sleepData.length - 1].date);
 
-  }
+  // try {
+  //   repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+  //   repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+  //   repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+  //   stepDate.innerText = timeframe;
+  //   userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+  //   userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+  //   userStepDistance.innerText = randomUser.calcMiles(timeframe);
+  //   userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  // }
+  // catch {
+  //   alert(`You dont have activity data for ${timeframe}. You will be shown your most recent activity data.`)
+  //   timeframe = randomUser.activityData[randomUser.activityData.length - 1].date
+  //   repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', timeframe);
+  //   repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', timeframe);
+  //   repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', timeframe);
+  //   stepDate.innerText = timeframe;
+  //   userStepAmount.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').numSteps;
+  //   userFlights.innerText = randomUser.findUserDataByDate(timeframe, 'activityData').flightsOfStairs;
+  //   userStepDistance.innerText = randomUser.calcMiles(timeframe);
+  //   userMinutesActive.innerText = randomUser.findUserDataByDate(timeframe,'activityData').minutesActive;
+  // }
+  // finally {
+  //    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  // }
 }
 
-function displayWidgetData() {
-  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
-  avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
-  avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
-  setTimeframeDisplays();
-}
+// function displayWidgetData() {
+  // avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+  // avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
+  // avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
+  // setTimeframeDisplays();
+// }
 
 function displaySleepData() {
-  sleepDate.innerText = timeframe;
+  sleepDate.innerText = sleepDataDate;
   sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
   sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
-  sleepInfo.innerHTML += `
-  <p>
-   <span class="sleep-date">${timeframe}</span>:
-   <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
-   <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
-  </p>
-   `;
+  // sleepInfo.innerHTML += `
+  // <p>
+  //  <span class="sleep-date">${sleepDataDate}</span>:
+  //  <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
+  //  <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
+  // </p>
+  //  `;
+   avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
+   avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
 }
 
 function displayHydrationData() {
-  waterDate.innerText = timeframe;
+  waterDate.innerText = hydrationDataDate;
   waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
-  waterInfo.innerHTML += `
-  <p>
-   <span class="water-date">${timeframe}</span>:
-   <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
-  </p>
-   `;
+  // waterInfo.innerHTML += `
+  // <p>
+  //  <span class="water-date">${hydrationDataDate}</span>:
+  //  <span class="water-amount">${randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces}</span> oz
+  // </p>
+  //  `;
+  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
 }
 
 function displaySleepWeek() {
@@ -244,27 +274,42 @@ function displayHyrationWeek() {
 }
 
 function setTimeframeDisplays() {
-  waterInfo.innerHTML = "";
-  sleepInfo.innerHTML = "";
-
-  if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
-    timeframeDisplay.innerText = timeframe;
-    timeframeButtonText.innerText = "WEEKLY";
-    displaySleepData();
-    displayHydrationData();
-  } else {
-    timeframeButtonText.innerText = "TODAY'S";
-    displayHyrationWeek();
-    displaySleepWeek();
+  if (hydrationDataDate === sleepDataDate && sleepDataDate === activityDataDate) {
+    timeframeDisplay.innerText = hydrationDataDate;
+  }
+  else if (hydrationDataDate > sleepDataDate && hydrationDataDate > activityDataDate) {
+    timeframeDisplay.innerText = hydrationDataDate;
+  }
+  else if (sleepDataDate > hydrationDataDate && sleepDataDate > activityDataDate) {
+    timeframeDisplay.innerText = sleepDataDate;
+  }
+  else {
+    timeframeDisplay.innerText = activityDataDate;
   }
 }
 
-
-function displayWeeklyTimeFrames() {
-  if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
-    timeframe = 0;
-  } else {
-    timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  }
-  setTimeframeDisplays();
-}
+// function setTimeframeDisplays() {
+//   waterInfo.innerHTML = "";
+//   sleepInfo.innerHTML = "";
+//
+//   if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+//     timeframeDisplay.innerText = timeframe;
+//     timeframeButtonText.innerText = "WEEKLY";
+//     displaySleepData();
+//     displayHydrationData();
+//   } else {
+//     timeframeButtonText.innerText = "TODAY'S";
+//     displayHyrationWeek();
+//     displaySleepWeek();
+//   }
+// }
+//
+//
+// function displayWeeklyTimeFrames() {
+//   if (timeframe === randomUser.hydrationData[randomUser.hydrationData.length - 1].date) {
+//     timeframe = 0;
+//   } else {
+//     timeframe = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+//   }
+//   setTimeframeDisplays();
+// }

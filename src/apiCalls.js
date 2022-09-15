@@ -9,10 +9,10 @@ function postData(repo, userData) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(userData),
     };
-return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
-  .then(resp => resp.json())
-  .then(data => console.log(data))
-  .catch(error => console.log(" We have a serious problem" , error))
+    return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
+      .then(resp => resp.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(" We have a serious problem" , error))
 };
 
 export { fetchData, postData }
