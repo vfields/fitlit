@@ -69,7 +69,6 @@ const sleepAmount = document.querySelector(".sleep-amount");
 const avgSleepQuality = document.querySelector(".avg-sleep-quality");
 const sleepQual = document.querySelector(".sleep-quality");
 
-
 // EVENT LISTENERS ************************************************
 timeFrameBtn.addEventListener('click', displayWeeklyTimeFrames);
 
