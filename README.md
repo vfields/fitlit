@@ -32,12 +32,12 @@
 </details>
 
 ## About The Project
-Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
+Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activity data, let you input new data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
 <p align="center">
-    <img width="500" src="https://media.giphy.com/media/dfSSwSOJQL0Yqlawmp/giphy.gif" alt="FitLit preview gif">
+    <img width="500" src="https://media.giphy.com/media/B8AedKmIkPmJOZ66s9/giphy.gif" alt="FitLit preview gif">
 </p>
 <br />
-This project was assigned during the second module of Turing's Front-End Engineering program, about 8 weeks into its students learning how to code. The details of this project are outlined in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+This two-part project was assigned during the second module of Turing's Front-End Engineering program, about 8-10 weeks into its students learning how to code. The details of this project are outlined in these <a href="http://frontend.turing.io/projects/fitlit.html">Part 1</a> and <a href="https://frontend.turing.edu/projects/Fitlit-part-two.html">Part 2</a> project specs.
 
 ### Built With
 
@@ -68,15 +68,15 @@ This project was assigned during the second module of Turing's Front-End Enginee
 
 ## Features
 
-- Displays a single user's data retrieved using the fetch API to the DOM
+- Implements both GET and POST network requests via fetch API to retrieve, display, and add new user data
 - Utilizes class-to-class interaction and a robust Mocha and Chai testing suite
 
 ### Reflections
 * Wins:<br>
-We were proud of the dynamic code created to organize our User class structure so that it identifies a unique user's information from multiple data bases. We also utilized iterator methods both in our main script file as well as our testing suite. 
+We were proud of the dynamic code created to organize our User class structure so that it identifies a unique user's information from multiple data bases. We also utilized iterator methods both in our main script file as well as our testing suite.
 
 * Challenges:<br>
-This was all of our group members' first time working with WebPack and network requests.
+This was all of our group members' first time working with WebPack, network requests, and form validation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

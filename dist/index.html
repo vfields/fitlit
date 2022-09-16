@@ -23,7 +23,7 @@
       <p>Showing data for <span class="timeframe-display">TIMEFRAME</span></p>
       <button class="update-button"><span class="update-button-text">SHOW</span> Update Info Form</button>
       <p>
-      <article class='data-box hidden'>
+      <form class='data-box hidden'>
         <label for="data-choice">Choose Activity Type:</label>
           <select name="data-choices" class="data-choices">
             <option value="water-data" selected>Water Data</option>
@@ -48,8 +48,10 @@
         <label for='flights-of-stairs' class="activity-form hidden">Flights of Stairs</label>
         <input class='activity-form flights-of-stairs-input hidden' name='flights-of-stairs' placeholder="15" size='15' maxlength='100'/>
 
+        <label for='mins-active' class="activity-form hidden">Minutes Active</label>
+        <input class='activity-form mins-active-input hidden' name='mins-active' placeholder="150" size='15' maxlength='100'/>
         <button type='submit' class='save-btn'>Save</button>
-      </article>
+      </form>
     </section>
     <section class="water-section">
       <h3>Water Intake</h3>
