@@ -34,7 +34,7 @@
 ## About The Project
 Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
 <p align="center">
-    <img width="500" src="https://media.giphy.com/media/k4871ZHj3U2cPuvIA7/giphy.gif" alt="FitLit preview gif">
+    <img width="500" src= "https://media.giphy.com/media/k4871ZHj3U2cPuvIA7/giphy.gif" alt="FitLit preview gif">
 </p>
 <br />
 This project was assigned during the second module of Turing's Front-End Engineering program, about 8 weeks into its students learning how to code. The details of this project are outlined in [this project spec](http://frontend.turing.io/projects/fitlit.html).
