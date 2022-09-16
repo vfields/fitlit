@@ -88,6 +88,7 @@ const numOfStepsInput = document.querySelector(".number-of-steps-input");
 const flightsOfStairsInput = document.querySelector(".flights-of-stairs-input");
 const dateInput = document.getElementById('activity-date');
 const saveBtn = document.querySelector(".save-btn");
+const minsActiveInput = document.querySelector(".mins-active-input")
 
 
 
@@ -320,20 +321,19 @@ function getInputValues() {
 }
 else if(dataChoices.selectedIndex === 1) {
   const userSleepData = { userID: randomUser.id,
-     date:  dateInput.value.split('-').join('/'),
-      hoursSlept: parseInt(hoursInput.value) ,
-      sleepQuality: parseInt(sleepQualityInput.value)
+     date: dateInput.value.split('-').join('/'),
+     hoursSlept: parseInt(hoursInput.value) ,
+     sleepQuality: parseInt(sleepQualityInput.value)
     }
     postData('sleep', userSleepData);
 }
 else {
   const userActivityData = { userID: randomUser.id,
-     date:  dateInput.value.split('-').join('/'),
-      flightsOfStairs: parseInt(.value) ,
-      minutesActive: parseInt(.value),
-      numSteps: parseInt()
+     date: dateInput.value.split('-').join('/'),
+     flightsOfStairs: parseInt(flightsOfStairsInput.value),
+     minutesActive: parseInt(minsActiveInput.value),
+     numSteps: parseInt(numOfStepsInput.value)
     }
     postData('activity', userActivityData);
-}
-
+ }
 }
