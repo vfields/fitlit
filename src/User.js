@@ -40,10 +40,6 @@ class User {
      return Math.round(totalDistance * 100) / 100;
    }
 
-  calcDailyMinutesActive(date) {
-    return this.findUserDataByDate(date, 'activityData').minutesActive;
-  }
-
  avgWeeklyMinutesActive(startDate, endDate) {
    const weekArray = this.getUserWeeklyData(startDate, endDate, 'activityData');
    const weekDataRepo = new Repository(weekArray);
