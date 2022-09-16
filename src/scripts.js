@@ -318,9 +318,22 @@ function getInputValues() {
   }
   postData('hydration', userWaterData);
 }
-else if(dataChoices.selectedIndex === 0) {
-  const userSleepData
+else if(dataChoices.selectedIndex === 1) {
+  const userSleepData = { userID: randomUser.id,
+     date:  dateInput.value.split('-').join('/'),
+      hoursSlept: parseInt(hoursInput.value) ,
+      sleepQuality: parseInt(sleepQualityInput.value)
+    }
+    postData('sleep', userSleepData);
 }
-
+else {
+  const userActivityData = { userID: randomUser.id,
+     date:  dateInput.value.split('-').join('/'),
+      flightsOfStairs: parseInt(.value) ,
+      minutesActive: parseInt(.value),
+      numSteps: parseInt()
+    }
+    postData('activity', userActivityData);
+}
 
 }
