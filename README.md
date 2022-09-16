@@ -32,7 +32,7 @@
 </details>
 
 ## About The Project
-Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activitiy inputted data, let you input new data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
+Are you looking for an easy way to track your wellness activities? Look no further! FitLit will dynamically display your different activity data, let you input new data, and allow you to compare your daily vs. weekly measurements. You can even see how your numbers stack up against the average of every other users' inputs in the database, as well as your individual all-time averages.<br>
 <p align="center">
     <img width="500" src="https://media.giphy.com/media/k4871ZHj3U2cPuvIA7/giphy.gif" alt="FitLit preview gif">
 </p>
