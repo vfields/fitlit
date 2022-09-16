@@ -27,7 +27,10 @@ class User {
   }
 
   findUserDataByDate(date, dataArray) {
-    return this[dataArray].find(entry => entry.date === date);
+    if (this[dataArray].find(entry => entry.date === date)) {
+      return this[dataArray].find(entry => entry.date === date);
+    }
+    return 0;
   }
 
   getUserWeeklyData(startDate, endDate, dataArray) {
@@ -40,10 +43,6 @@ class User {
      return Math.round(totalDistance * 100) / 100;
    }
 
-  calcDailyMinutesActive(date) {
-    return this.findUserDataByDate(date, 'activityData').minutesActive;
-  }
-
  avgWeeklyMinutesActive(startDate, endDate) {
    const weekArray = this.getUserWeeklyData(startDate, endDate, 'activityData');
    const weekDataRepo = new Repository(weekArray);
@@ -51,10 +50,7 @@ class User {
   }
 
   meetStepGoal(date) {
-    if (this.findUserDataByDate(date, 'activityData').numSteps >= this.dailyStepGoal) {
-      return true;
-    }
-    return false;
+    return this.findUserDataByDate(date, 'activityData').numSteps >= this.dailyStepGoal;
   }
 
   findStepGoalExceededDays() {

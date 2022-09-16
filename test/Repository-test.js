@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import Repository from '../src/Repository';
 import userData from '../src/data/userData';
 import hydrationData from '../src/data/hydrationData';
+import activityData from '../src/data/activityData';
 
 
 describe('Repository', () => {
@@ -11,10 +12,12 @@ describe('Repository', () => {
 
   let userRepo;
   let hydrationRepo;
+  let activityRepo;
 
   beforeEach(() => {
      userRepo = new Repository(userData);
      hydrationRepo = new Repository(hydrationData);
+     activityRepo = new Repository(activityData);
   });
 
   it ('should be an instance of Repository', () => {
@@ -42,5 +45,11 @@ describe('Repository', () => {
 
     expect(stepGoalAvg).to.equal(7000);
     expect(numOuncesAvg).to.equal(39);
+  });
+
+  it('should find the average of a specific property for all user on a specific day', () => {
+    expect(activityRepo.calcRepoAvgByDate('flightsOfStairs', "2019/06/15")).to.equal(20.8);
+    expect(activityRepo.calcRepoAvgByDate('numSteps', "2019/06/15")).to.equal(6062);
+    expect(activityRepo.calcRepoAvgByDate('minutesActive', "2019/06/15")).to.equal(144.2);
   });
 });
