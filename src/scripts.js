@@ -81,7 +81,18 @@ const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button"
 const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
 const activityInfo = document.querySelector(".activity-information");
 
+const waterInput = document.querySelector(".water-intake-input");
+const hoursInput = document.querySelector(".hours-slept-input");
+const sleepQualityInput = document.querySelector(".sleep-quality-input");
+const numOfStepsInput = document.querySelector(".number-of-steps-input");
+const flightsOfStairsInput = document.querySelector(".flights-of-stairs-input");
+const dateInput = document.getElementById('activity-date');
+const saveBtn = document.querySelector(".save-btn");
+
+
+
 // EVENT LISTENERS ************************************************
+saveBtn.addEventListener('click', getInputValues);
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
@@ -296,4 +307,20 @@ function displayActivityWeek() {
   </p>
     `;
   });
+}
+
+function getInputValues() {
+  event.preventDefault()
+  if (dataChoices.selectedIndex === 0) {
+  const userWaterData = { userID: randomUser.id,
+    date: dateInput.value.split('-').join('/'),
+    numOunces: parseInt(waterInput.value)
+  }
+  postData('hydration', userWaterData);
+}
+else if(dataChoices.selectedIndex === 0) {
+  const userSleepData
+}
+
+
 }
