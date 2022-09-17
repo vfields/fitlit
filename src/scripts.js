@@ -98,50 +98,51 @@ waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
 updateInfoBtn.addEventListener('click', displayDataForm);
+dataChoices.addEventListener('change', displayFormSelection);
 
 
-
-dataChoices.addEventListener('change', function() {
-  if (dataChoices.selectedIndex === 0) {
-    waterFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-  }
-  else if (dataChoices.selectedIndex === 1) {
-    waterFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-  }
-  else if (dataChoices.selectedIndex === 2) {
-    waterFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-  }
-})
 
 // EVENT HANDLERS *************************************************
+function displayFormSelection() {
+ if (dataChoices.selectedIndex === 0) {
+   waterFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+ }
+ else if (dataChoices.selectedIndex === 1) {
+   waterFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+ }
+ else if (dataChoices.selectedIndex === 2) {
+   waterFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+ }
+}
 
 function displayDataForm() {
   dataForm.classList.toggle('hidden');
   dataForm.reset()
+  displayFormSelection()
   if (updateInfoBtnText.innerText === "SHOW") {
     updateInfoBtnText.innerText = "HIDE";
   }
