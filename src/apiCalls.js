@@ -1,8 +1,10 @@
+import { displayDataForm } from './scripts.js';
+
 function fetchData(repo) {
   return fetch(`http://localhost:3001/api/v1/${repo}`)
       .then(response => {
-          if (response.ok) {
-          return response.json();
+        if (response.ok) {
+        return response.json();
          }
       throw new Error('Not a 200 status');
      })
@@ -18,9 +20,17 @@ function postData(repo, userData) {
       body: JSON.stringify(userData),
     };
     return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
-      .then(resp => resp.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(" We have a serious problem" , error))
+      .then(response => {
+        if (response.ok) {
+        alert('Information submitted')
+        displayDataForm()
+        return response.json();
+         }
+      throw new Error('Not a 200 status');
+     })
+      .catch(error => {
+      alert('Oops, something went wrong. Try again later')
+      })
 };
 
 export { fetchData, postData }

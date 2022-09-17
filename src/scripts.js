@@ -91,21 +91,15 @@ const minsActiveInput = document.querySelector(".mins-active-input");
 
 
 
+
 // EVENT LISTENERS ************************************************
 saveBtn.addEventListener('click', getInputValues);
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
+updateInfoBtn.addEventListener('click', displayDataForm);
 
-updateInfoBtn.addEventListener('click', function() {
-  dataForm.classList.toggle('hidden');
-  if (updateInfoBtnText.innerText === "SHOW") {
-    updateInfoBtnText.innerText = "HIDE";
-  }
-  else {
-    updateInfoBtnText.innerText = "SHOW";
-  }
-})
+
 
 dataChoices.addEventListener('change', function() {
   if (dataChoices.selectedIndex === 0) {
@@ -144,6 +138,17 @@ dataChoices.addEventListener('change', function() {
 })
 
 // EVENT HANDLERS *************************************************
+
+function displayDataForm() {
+  dataForm.classList.toggle('hidden');
+  dataForm.reset()
+  if (updateInfoBtnText.innerText === "SHOW") {
+    updateInfoBtnText.innerText = "HIDE";
+  }
+  else {
+    updateInfoBtnText.innerText = "SHOW";
+  }
+}
 
 function findDate() {
   hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
@@ -336,3 +341,5 @@ else {
     postData('activity', userActivityData);
  }
 }
+
+export { displayDataForm }
