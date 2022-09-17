@@ -31,25 +31,25 @@
             <option value="activity-data">Activity Data</option>
           </select>
         <label for="activity-date">Date:</label>
-        <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
+        <input class='date-form reset-input' type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
 
         <label for='water-intake' class="water-form" id='body'>Water Intake (oz)</label>
-        <input class='water-form water-intake-input' name='water-intake' placeholder="32" size='15' maxlength='100'/>
+        <input class='water-form water-intake-input' name='water-intake' placeholder="32" size='15' maxlength='100' type="number" min="0" required/>
 
         <label for='hours-slept' class="sleep-form hidden">Hours Slept</label>
-        <input class='sleep-form hours-slept-input hidden' name='hours-slept' placeholder="8" size='15' maxlength='100'/>
+        <input class='sleep-form hours-slept-input hidden' name='hours-slept' placeholder="8" size='15' maxlength='100' type="number" min="0" required/>
 
         <label for='sleep-quality' class="sleep-form hidden" id='body'>Sleep Quality</label>
-        <input class='sleep-form sleep-quality-input hidden' name='sleep-quality' placeholder="4" size='15' maxlength='100'/>
+        <input class='sleep-form sleep-quality-input hidden' name='sleep-quality' placeholder="4" size='15' maxlength='100' type="number" min="0" required/>
 
         <label for='number-of-steps' class="activity-form hidden">Number of Steps</label>
-        <input class='activity-form number-of-steps-input hidden' name='number-of-steps' placeholder="5000" size='15' maxlength='100'/>
+        <input class='activity-form number-of-steps-input hidden' name='number-of-steps' placeholder="5000" size='15' maxlength='100' type="number" min="0" required/>
 
         <label for='flights-of-stairs' class="activity-form hidden">Flights of Stairs</label>
-        <input class='activity-form flights-of-stairs-input hidden' name='flights-of-stairs' placeholder="15" size='15' maxlength='100'/>
+        <input class='activity-form flights-of-stairs-input hidden' name='flights-of-stairs' placeholder="15" size='15' maxlength='100' type="number" min="0" required/>
 
         <label for='mins-active' class="activity-form hidden">Minutes Active</label>
-        <input class='activity-form mins-active-input hidden' name='mins-active' placeholder="150" size='15' maxlength='100'/>
+        <input class='activity-form mins-active-input hidden' name='mins-active' placeholder="150" size='15' maxlength='100' type="number" min="0" required/>
         <button type='submit' class='save-btn'>Save</button>
       </form>
     </section>

@@ -80,7 +80,6 @@ const sleepTimeframeBtnText = document.querySelector(".sleep-timeframe-button-te
 const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button");
 const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
 const activityInfo = document.querySelector(".activity-information");
-
 const waterInput = document.querySelector(".water-intake-input");
 const hoursInput = document.querySelector(".hours-slept-input");
 const sleepQualityInput = document.querySelector(".sleep-quality-input");
@@ -88,7 +87,8 @@ const numOfStepsInput = document.querySelector(".number-of-steps-input");
 const flightsOfStairsInput = document.querySelector(".flights-of-stairs-input");
 const dateInput = document.getElementById('activity-date');
 const saveBtn = document.querySelector(".save-btn");
-const minsActiveInput = document.querySelector(".mins-active-input")
+const minsActiveInput = document.querySelector(".mins-active-input");
+
 
 
 
@@ -97,54 +97,59 @@ saveBtn.addEventListener('click', getInputValues);
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
+updateInfoBtn.addEventListener('click', displayDataForm);
+dataChoices.addEventListener('change', displayFormSelection);
 
-updateInfoBtn.addEventListener('click', function() {
+
+
+// EVENT HANDLERS *************************************************
+function displayFormSelection() {
+ if (dataChoices.selectedIndex === 0) {
+   waterFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+ }
+ else if (dataChoices.selectedIndex === 1) {
+   waterFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+ }
+ else if (dataChoices.selectedIndex === 2) {
+   waterFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   sleepFormDisplays.forEach(display => {
+     display.classList.add('hidden');
+   })
+   activityFormDisplays.forEach(display => {
+     display.classList.remove('hidden');
+   })
+ }
+}
+
+function displayDataForm() {
   dataForm.classList.toggle('hidden');
+  dataForm.reset()
+  displayFormSelection()
   if (updateInfoBtnText.innerText === "SHOW") {
     updateInfoBtnText.innerText = "HIDE";
   }
   else {
     updateInfoBtnText.innerText = "SHOW";
   }
-})
-
-dataChoices.addEventListener('change', function() {
-  if (dataChoices.selectedIndex === 0) {
-    waterFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-  }
-  else if (dataChoices.selectedIndex === 1) {
-    waterFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-  }
-  else if (dataChoices.selectedIndex === 2) {
-    waterFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    sleepFormDisplays.forEach(display => {
-      display.classList.add('hidden');
-    })
-    activityFormDisplays.forEach(display => {
-      display.classList.remove('hidden');
-    })
-  }
-})
-
-// EVENT HANDLERS *************************************************
+}
 
 function findDate() {
   hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
@@ -259,7 +264,7 @@ function setSleepBtnDisplays() {
      <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
      <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
     </p>
-    `
+    `;
   }
 }
 
@@ -291,7 +296,7 @@ function setActivityBtnDisplays() {
     <p>
       Given your <span class="user-stride-length">${randomUser.strideLength}</span> ft stride length, you walked <span class="user-step-distance">${randomUser.calcMiles(activityDataDate)}</span> miles today!
     </p>
-    `
+    `;
   }
 }
 
@@ -337,3 +342,5 @@ else {
     postData('activity', userActivityData);
  }
 }
+
+export { displayDataForm }

@@ -35,6 +35,10 @@ header {
   grid-column: span 2;
 }
 
+input:invalid {
+  border: 2px solid red;
+}
+
 
 /* TEXT ************************************************ */
 h1,
