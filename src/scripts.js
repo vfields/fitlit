@@ -80,7 +80,6 @@ const sleepTimeframeBtnText = document.querySelector(".sleep-timeframe-button-te
 const activityTimeFrameBtn = document.querySelector(".activity-timeframe-button");
 const activityTimeframeBtnText = document.querySelector(".activity-timeframe-button-text");
 const activityInfo = document.querySelector(".activity-information");
-
 const waterInput = document.querySelector(".water-intake-input");
 const hoursInput = document.querySelector(".hours-slept-input");
 const sleepQualityInput = document.querySelector(".sleep-quality-input");
@@ -88,7 +87,7 @@ const numOfStepsInput = document.querySelector(".number-of-steps-input");
 const flightsOfStairsInput = document.querySelector(".flights-of-stairs-input");
 const dateInput = document.getElementById('activity-date');
 const saveBtn = document.querySelector(".save-btn");
-const minsActiveInput = document.querySelector(".mins-active-input")
+const minsActiveInput = document.querySelector(".mins-active-input");
 
 
 
@@ -259,7 +258,7 @@ function setSleepBtnDisplays() {
      <span class="sleep-amount">${randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept}</span> hrs,
      <span class="sleep-quality"> ${randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality}</span>/5 Quality
     </p>
-    `
+    `;
   }
 }
 
@@ -291,7 +290,7 @@ function setActivityBtnDisplays() {
     <p>
       Given your <span class="user-stride-length">${randomUser.strideLength}</span> ft stride length, you walked <span class="user-step-distance">${randomUser.calcMiles(activityDataDate)}</span> miles today!
     </p>
-    `
+    `;
   }
 }
 

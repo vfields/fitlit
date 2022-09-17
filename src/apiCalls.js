@@ -1,6 +1,14 @@
 function fetchData(repo) {
   return fetch(`http://localhost:3001/api/v1/${repo}`)
-      .then(response => response.json());
+      .then(response => {
+          if (response.ok) {
+          return response.json();
+         }
+      throw new Error('Not a 200 status');
+     })
+       .catch(error => {
+       alert('Oops, something went wrong. Try refreshing your page.');
+       })
 };
 
 function postData(repo, userData) {
