@@ -33,11 +33,11 @@ describe('User', () => {
   });
 
   it('should store user properties in each instance from the data', () => {
-    Object.keys(user1)
+    Object.keys(userData[0])
       .forEach(key => {
         expect(user1[key]).to.equal(userData[0][key]);
       });
-    Object.keys(user2)
+    Object.keys(userData[1])
       .forEach(key => {
         expect(user2[key]).to.equal(userData[1][key]);
       });
