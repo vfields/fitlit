@@ -33,11 +33,11 @@ describe('User', () => {
   });
 
   it('should store user properties in each instance from the data', () => {
-    Object.keys(user1)
+    Object.keys(userData[0])
       .forEach(key => {
         expect(user1[key]).to.equal(userData[0][key]);
       });
-    Object.keys(user2)
+    Object.keys(userData[1])
       .forEach(key => {
         expect(user2[key]).to.equal(userData[1][key]);
       });
@@ -66,13 +66,15 @@ describe('User', () => {
     expect(user1.calcUserAvg('sleepData', 'hoursSlept')).to.equal(10);
   });
 
-  it('should be able to find the data for a user when provided a date', () => {
+  it('should be able to find the data for a user on a specific day', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
+    user1.setUserData(activityRepo, 'activityData', 'userID');
 
     expect(user1.findUserDataByDate('2019/06/15', 'hydrationData')).to.deep.equal(hydrationData[0]);
     expect(user1.findUserDataByDate('2019/06/15', 'sleepData')).to.deep.equal(sleepData[0]);
     expect(user1.findUserDataByDate('2022/06/15', 'sleepData')).to.equal(0);
+    expect(user1.findUserDataByDate('2019/06/15', 'activityData')).to.deep.equal(activityData[0]);
   });
 
   it('should be able to return the weekly data for a user', () => {
@@ -86,31 +88,25 @@ describe('User', () => {
   it('should return the miles a user has walked based on their number of steps on a specific day', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.calcMiles('2019/06/15')).to.equal(3.06);
-  });
-
-  it('should find a users minutes active for a specific day', () => {
-    user1.setUserData(activityRepo, 'activityData', 'userID');
-
-    expect(user1.findUserDataByDate('2019/06/15', 'activityData')).to.deep.equal(activityData[0]);
+    expect(user1.calcDistance('2019/06/15')).to.equal(3.06);
   });
 
   it('should calculate the average weekly minutes active for a user', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.avgWeeklyMinutesActive("2019/06/15", "2019/06/21")).to.equal(134.29);
+    expect(user1.calcUserWeeklyAvg("2019/06/15", "2019/06/21")).to.equal(134.29);
   });
 
   it('should determine if a user met their step goal for a specific day', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.meetStepGoal("2019/06/15")).to.equal(false);
+    expect(user1.metStepGoal("2019/06/15")).to.equal(false);
   });
 
   it('should find all days a user exceeded their step goal', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
-    expect(user1.findStepGoalExceededDays()).to.deep.equal(['2019/06/16']);
+    expect(user1.findDaysExceedingStepGoal()).to.deep.equal(['2019/06/16']);
   });
 
   it('should find the most amount of flights of stairs a user has ever climbed', () => {
