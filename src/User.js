@@ -39,7 +39,7 @@ class User {
   }
 
   calcMiles(date) {
-     const totalDistance = this.findUserDataByDate(date, 'activityData').numSteps * this.strideLength / 5280
+     const totalDistance = this.findUserDataByDate(date, 'activityData').numSteps * this.strideLength / 5280;
      return Math.round(totalDistance * 100) / 100;
    }
 
@@ -49,18 +49,18 @@ class User {
    return Math.round(weekDataRepo.calcRepoAvg('minutesActive') * 100) / 100;
   }
 
-  meetStepGoal(date) {
+  metStepGoal(date) {
     return this.findUserDataByDate(date, 'activityData').numSteps >= this.dailyStepGoal;
   }
 
-  findStepGoalExceededDays() {
+  findDaysExceedingStepGoal() {
     return this.activityData
       .reduce((acc, curr) => {
         if (this.dailyStepGoal < curr.numSteps) {
           acc.push(curr.date);
         }
         return acc;
-      }, [])
+      }, []);
   }
 
   findStairClimbingRecord() {
