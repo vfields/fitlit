@@ -20,18 +20,18 @@ function postData(repo, userData) {
       body: JSON.stringify(userData)
     };
 
-    return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Not a 200 status');
-        }
-        alert('Information submitted');
-        displayDataForm();
-        return response.json();
-      })
-      .catch(error => {
-        alert('Oops, something went wrong. Try again later');
-      });
+  return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Not a 200 status');
+      }
+      alert('Information submitted');
+      displayDataForm();
+      return response.json();
+    })
+    .catch(error => {
+      alert('Oops, something went wrong. Try again later');
+    });
 }
 
 export { fetchData, postData };

@@ -316,32 +316,25 @@ function displayActivityWeek() {
 function getInputValues(event) {
   event.preventDefault();
 
-  if (dataChoices.selectedIndex === 0) {
-    const userWaterData = { 
-      userID: randomUser.id,
-      date: dateInput.value.split('-').join('/'),
-      numOunces: parseInt(waterInput.value)
-    };
-    postData('hydration', userWaterData);
+  const userInputData = {
+    userID: randomUser.id,
+    date: dateInput.value.split('-').join('/')
+  };
+
+  if (`${dataChoices.value}` === "hydration") {
+    userInputData.numOunces = parseInt(waterInput.value);
   }
-  else if (dataChoices.selectedIndex === 1) {
-    const userSleepData = { 
-      userID: randomUser.id,
-      date: dateInput.value.split('-').join('/'),
-      hoursSlept: parseInt(hoursInput.value),
-      sleepQuality: parseInt(sleepQualityInput.value)
-    };
-    postData('sleep', userSleepData);
-  } else {
-    const userActivityData = { 
-      userID: randomUser.id,
-      date: dateInput.value.split('-').join('/'),
-      flightsOfStairs: parseInt(flightsOfStairsInput.value),
-      minutesActive: parseInt(minsActiveInput.value),
-      numSteps: parseInt(numOfStepsInput.value)
-    };
-    postData('activity', userActivityData);
-  }
+  else if (`${dataChoices.value}` === "sleep") {
+    userInputData.hoursSlept = parseInt(hoursInput.value);
+    userInputData.sleepQuality = parseInt(sleepQualityInput.value);
+  } 
+  else if (`${dataChoices.value}` === "activity") {
+    userInputData.flightsOfStairs = parseInt(flightsOfStairsInput.value);
+    userInputData.minutesActive = parseInt(minsActiveInput.value);
+    userInputData.numSteps = parseInt(numOfStepsInput.value);
+  };
+
+  postData(`${dataChoices.value}`, userInputData);
 }
 
 export { displayDataForm };
