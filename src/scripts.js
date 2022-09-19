@@ -182,7 +182,7 @@ function displayStepData() {
   userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
   userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
   userStrideLength.innerText = randomUser.strideLength;
-  userStepDistance.innerText = randomUser.calcMiles(activityDataDate);
+  userStepDistance.innerText = randomUser.calcDistance(activityDataDate);
   repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
   repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
   repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
@@ -293,7 +293,7 @@ function setActivityBtnDisplays() {
     </p>
     <p>
       Given your <span class="user-stride-length">${randomUser.strideLength}</span> ft stride length, 
-      you walked <span class="user-step-distance">${randomUser.calcMiles(activityDataDate)}</span> miles today!
+      you walked <span class="user-step-distance">${randomUser.calcDistance(activityDataDate)}</span> miles today!
     </p>
     `;
   }

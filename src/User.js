@@ -38,15 +38,15 @@ class User {
     return this[dataArray].slice(datesOnlyArray.indexOf(startDate), datesOnlyArray.indexOf(endDate) + 1);
   }
 
-  calcMiles(date) {
+  calcDistance(date) {
      const totalDistance = this.findUserDataByDate(date, 'activityData').numSteps * this.strideLength / 5280;
      return Math.round(totalDistance * 100) / 100;
    }
 
- avgWeeklyMinutesActive(startDate, endDate) {
-   const weekArray = this.getUserWeeklyData(startDate, endDate, 'activityData');
-   const weekDataRepo = new Repository(weekArray);
-   return Math.round(weekDataRepo.calcRepoAvg('minutesActive') * 100) / 100;
+  calcUserWeeklyAvg(startDate, endDate) {
+    const weekArray = this.getUserWeeklyData(startDate, endDate, 'activityData');
+    const weekDataRepo = new Repository(weekArray);
+    return Math.round(weekDataRepo.calcRepoAvg('minutesActive') * 100) / 100;
   }
 
   metStepGoal(date) {
