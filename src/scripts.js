@@ -29,7 +29,7 @@ function setData(repos) {
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
-  findDate();
+  determineMatchingDates();
 
   displayUserData();
 }
@@ -38,6 +38,16 @@ function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
   const randomUserData = userRepository.findUser(randomIndex, 'id');
   return new User(randomUserData[0]);
+}
+
+function determineMatchingDates() {
+  hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
+  sleepDataDate = randomUser.sleepData[randomUser.sleepData.length - 1].date;
+  activityDataDate = randomUser.activityData[randomUser.activityData.length - 1].date;
+
+  if (hydrationDataDate !== sleepDataDate && sleepDataDate !== activityDataDate) {
+    alert(`You don't have data available for today in all categories. You will be shown your most recent data instead.`);
+  }
 }
 
 // DOM ELEMENTS ***************************************************
@@ -91,14 +101,79 @@ const repoStepGoal = document.querySelector('.repo-step-goal');
 const userStrideLength = document.querySelector('.user-stride-length');
 
 // EVENT LISTENERS ************************************************
+updateInfoBtn.addEventListener('click', displayDataForm);
+dataChoices.addEventListener('change', displayFormSelection);
 saveBtn.addEventListener('click', getInputValues);
 waterTimeFrameBtn.addEventListener('click', setWaterBtnDisplays);
 sleepTimeFrameBtn.addEventListener('click', setSleepBtnDisplays);
 activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
-updateInfoBtn.addEventListener('click', displayDataForm);
-dataChoices.addEventListener('change', displayFormSelection);
 
 // EVENT HANDLERS *************************************************
+function displayUserData() {
+  displayUserInfo();
+  setTimeframeDisplays();
+  displayHydrationData();
+  displaySleepData();
+  displayActivityData();
+}
+
+function displayUserInfo() {
+  userFirstName.innerText = randomUser.name;
+  userAddress.innerText = randomUser.address;
+  userEmail.innerText = randomUser.email;
+  const theirFriends = randomUser.friends.flatMap(friend => userRepository.findUser(friend, 'id'));
+  theirFriends.map(friend => friend.name).forEach((friend) => {
+    userFriends.innerHTML += `<p>${friend}</p>`
+  });
+}
+
+function setTimeframeDisplays() {
+  const dates = [hydrationDataDate, sleepDataDate, activityDataDate];
+  dates.sort((a, b) => a < b ? 1 : -1);
+  timeframeDisplay.innerText = dates[0];
+}
+
+function displayHydrationData() {
+  waterDate.innerText = hydrationDataDate;
+  waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
+  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
+}
+
+function displaySleepData() {
+  sleepDate.innerText = sleepDataDate;
+  sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
+  sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
+  avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
+  avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
+}
+
+function displayActivityData() {
+  stepDate.innerText = activityDataDate;
+  userStepAmount.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps;
+  userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
+  userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
+  userStrideLength.innerText = randomUser.strideLength;
+  userStepDistance.innerText = randomUser.calcDistance(activityDataDate);
+  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
+  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
+  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
+  userStepGoal.innerText = randomUser.dailyStepGoal;
+  repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
+}
+
+function displayDataForm() {
+  dataForm.classList.toggle('hidden');
+  dataForm.reset();
+  displayFormSelection();
+
+  if (updateInfoBtnText.innerText === "SHOW") {
+    updateInfoBtnText.innerText = "HIDE";
+  }
+  else {
+    updateInfoBtnText.innerText = "SHOW";
+  }
+}
+
 function displayFormSelection() {
   if (`${dataChoices.value}` === "hydration") {
     waterFormDisplays.forEach(display => {
@@ -135,88 +210,28 @@ function displayFormSelection() {
   }
 }
 
-function displayDataForm() {
-  dataForm.classList.toggle('hidden');
-  dataForm.reset();
-  displayFormSelection();
+function getInputValues(event) {
+  event.preventDefault();
 
-  if (updateInfoBtnText.innerText === "SHOW") {
-    updateInfoBtnText.innerText = "HIDE";
+  const userInputData = {
+    userID: randomUser.id,
+    date: dateInput.value.split('-').join('/')
+  };
+
+  if (`${dataChoices.value}` === "hydration") {
+    userInputData.numOunces = parseInt(waterInput.value);
   }
-  else {
-    updateInfoBtnText.innerText = "SHOW";
-  }
-}
+  else if (`${dataChoices.value}` === "sleep") {
+    userInputData.hoursSlept = parseInt(hoursInput.value);
+    userInputData.sleepQuality = parseInt(sleepQualityInput.value);
+  } 
+  else if (`${dataChoices.value}` === "activity") {
+    userInputData.flightsOfStairs = parseInt(flightsOfStairsInput.value);
+    userInputData.minutesActive = parseInt(minsActiveInput.value);
+    userInputData.numSteps = parseInt(numOfStepsInput.value);
+  };
 
-function findDate() {
-  hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
-  sleepDataDate = randomUser.sleepData[randomUser.sleepData.length - 1].date;
-  activityDataDate = randomUser.activityData[randomUser.activityData.length - 1].date;
-
-  if (hydrationDataDate !== sleepDataDate && sleepDataDate !== activityDataDate) {
-    alert(`You don't have data available for today in all categories. You will be shown your most recent data instead.`);
-  }
-}
-
-function displayUserData() {
-  displayUserInfo();
-  displayStepData();
-  displaySleepData();
-  displayHydrationData();
-  setTimeframeDisplays();
-}
-
-function displayUserInfo() {
-  userFirstName.innerText = randomUser.name;
-  userAddress.innerText = randomUser.address;
-  userEmail.innerText = randomUser.email;
-  const theirFriends = randomUser.friends.flatMap(friend => userRepository.findUser(friend, 'id'));
-  const theirFriendsName = theirFriends.map(friend => friend.name).forEach((friend) => {
-    userFriends.innerHTML += `<p>${friend}</p>`
-  });
-}
-
-function displayStepData() {
-  stepDate.innerText = activityDataDate;
-  userStepAmount.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').numSteps;
-  userFlights.innerText = randomUser.findUserDataByDate(activityDataDate, 'activityData').flightsOfStairs;
-  userMinutesActive.innerText = randomUser.findUserDataByDate(activityDataDate,'activityData').minutesActive;
-  userStrideLength.innerText = randomUser.strideLength;
-  userStepDistance.innerText = randomUser.calcDistance(activityDataDate);
-  repoAvgSteps.innerText = activityRepository.calcRepoAvgByDate('numSteps', activityDataDate);
-  repoAvgStairs.innerText = activityRepository.calcRepoAvgByDate('flightsOfStairs', activityDataDate);
-  repoAvgMinutes.innerText = activityRepository.calcRepoAvgByDate('minutesActive', activityDataDate);
-  userStepGoal.innerText = randomUser.dailyStepGoal;
-  repoStepGoal.innerText = userRepository.calcRepoAvg('dailyStepGoal');
-}
-
-function displaySleepData() {
-  sleepDate.innerText = sleepDataDate;
-  sleepAmount.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].hoursSlept;
-  sleepQual.innerText = randomUser.sleepData[randomUser.sleepData.length - 1].sleepQuality;
-  avgSleepAmount.innerText = randomUser.calcUserAvg('sleepData', 'hoursSlept');
-  avgSleepQuality.innerText = randomUser.calcUserAvg('sleepData', 'sleepQuality');
-}
-
-function displayHydrationData() {
-  waterDate.innerText = hydrationDataDate;
-  waterAmount.innerText = randomUser.hydrationData[randomUser.hydrationData.length - 1].numOunces;
-  avgWaterAmount.innerText = randomUser.calcUserAvg('hydrationData', 'numOunces');
-}
-
-function setTimeframeDisplays() {
-  if (hydrationDataDate === sleepDataDate && sleepDataDate === activityDataDate) {
-    timeframeDisplay.innerText = hydrationDataDate;
-  }
-  else if (hydrationDataDate > sleepDataDate && hydrationDataDate > activityDataDate) {
-    timeframeDisplay.innerText = hydrationDataDate;
-  }
-  else if (sleepDataDate > hydrationDataDate && sleepDataDate > activityDataDate) {
-    timeframeDisplay.innerText = sleepDataDate;
-  }
-  else {
-    timeframeDisplay.innerText = activityDataDate;
-  }
+  postData(`${dataChoices.value}`, userInputData);
 }
 
 function setWaterBtnDisplays() {
@@ -311,30 +326,6 @@ function displayActivityWeek() {
   </p>
     `;
   });
-}
-
-function getInputValues(event) {
-  event.preventDefault();
-
-  const userInputData = {
-    userID: randomUser.id,
-    date: dateInput.value.split('-').join('/')
-  };
-
-  if (`${dataChoices.value}` === "hydration") {
-    userInputData.numOunces = parseInt(waterInput.value);
-  }
-  else if (`${dataChoices.value}` === "sleep") {
-    userInputData.hoursSlept = parseInt(hoursInput.value);
-    userInputData.sleepQuality = parseInt(sleepQualityInput.value);
-  } 
-  else if (`${dataChoices.value}` === "activity") {
-    userInputData.flightsOfStairs = parseInt(flightsOfStairsInput.value);
-    userInputData.minutesActive = parseInt(minsActiveInput.value);
-    userInputData.numSteps = parseInt(numOfStepsInput.value);
-  };
-
-  postData(`${dataChoices.value}`, userInputData);
 }
 
 export { displayDataForm };
