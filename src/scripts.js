@@ -29,7 +29,7 @@ function setData(repos) {
   randomUser.setUserData(sleepRepository, 'sleepData', 'userID');
   activityRepository = new Repository(repos[3].activityData);
   randomUser.setUserData(activityRepository, 'activityData', 'userID');
-  determineMatchingDates();
+  setDates();
 
   displayUserData();
 }
@@ -40,7 +40,7 @@ function getRandomUser(users) {
   return new User(randomUserData[0]);
 }
 
-function determineMatchingDates() {
+function setDates() {
   hydrationDataDate = randomUser.hydrationData[randomUser.hydrationData.length - 1].date;
   sleepDataDate = randomUser.sleepData[randomUser.sleepData.length - 1].date;
   activityDataDate = randomUser.activityData[randomUser.activityData.length - 1].date;
@@ -111,7 +111,7 @@ activityTimeFrameBtn.addEventListener('click', setActivityBtnDisplays);
 // EVENT HANDLERS *************************************************
 function displayUserData() {
   displayUserInfo();
-  setTimeframeDisplays();
+  setTimeframeDisplay();
   displayHydrationData();
   displaySleepData();
   displayActivityData();
@@ -127,7 +127,7 @@ function displayUserInfo() {
   });
 }
 
-function setTimeframeDisplays() {
+function setTimeframeDisplay() {
   const dates = [hydrationDataDate, sleepDataDate, activityDataDate];
   dates.sort((a, b) => a < b ? 1 : -1);
   timeframeDisplay.innerText = dates[0];
