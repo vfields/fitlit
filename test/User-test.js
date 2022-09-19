@@ -66,13 +66,15 @@ describe('User', () => {
     expect(user1.calcUserAvg('sleepData', 'hoursSlept')).to.equal(10);
   });
 
-  it('should be able to find the data for a user when provided a date', () => {
+  it('should be able to find the data for a user on a specific day', () => {
     user1.setUserData(hydroRepo, 'hydrationData', 'userID');
     user1.setUserData(sleepRepo, 'sleepData', 'userID');
+    user1.setUserData(activityRepo, 'activityData', 'userID');
 
     expect(user1.findUserDataByDate('2019/06/15', 'hydrationData')).to.deep.equal(hydrationData[0]);
     expect(user1.findUserDataByDate('2019/06/15', 'sleepData')).to.deep.equal(sleepData[0]);
     expect(user1.findUserDataByDate('2022/06/15', 'sleepData')).to.equal(0);
+    expect(user1.findUserDataByDate('2019/06/15', 'activityData')).to.deep.equal(activityData[0]);
   });
 
   it('should be able to return the weekly data for a user', () => {
@@ -87,12 +89,6 @@ describe('User', () => {
     user1.setUserData(activityRepo, 'activityData', 'userID');
 
     expect(user1.calcMiles('2019/06/15')).to.equal(3.06);
-  });
-
-  it('should find a users minutes active for a specific day', () => {
-    user1.setUserData(activityRepo, 'activityData', 'userID');
-
-    expect(user1.findUserDataByDate('2019/06/15', 'activityData')).to.deep.equal(activityData[0]);
   });
 
   it('should calculate the average weekly minutes active for a user', () => {
