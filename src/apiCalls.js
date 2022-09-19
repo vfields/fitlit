@@ -1,4 +1,4 @@
-import { displayDataForm } from './scripts.js';
+// import { displayDataForm } from './scripts.js';
 
 function fetchData(repo) {
   return fetch(`http://localhost:3001/api/v1/${repo}`)
@@ -23,8 +23,8 @@ function postData(repo, userData) {
     return fetch(`http://localhost:3001/api/v1/${repo}`, requestData)
       .then(response => {
         if (response.ok) {
-          alert('Information submitted')
-          displayDataForm()
+          alert('Information submitted');
+          displayDataForm();
           return response.json();
         }
         throw new Error('Not a 200 status');
