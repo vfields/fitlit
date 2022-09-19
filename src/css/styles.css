@@ -4,11 +4,11 @@
 }
 
 /* BODY ************************************************* */
-body, html {
+body, 
+html {
   color: white;
-  background: linear-gradient(40deg,
-    rgba(2,0,36,1) 0%, rgba(101,13,137,1) 38%, rgba(0,212,255,1) 100%);
   font-family: open-sans, sans-serif;
+  background: linear-gradient(40deg, rgba(2,0,36,1) 0%, rgba(101,13,137,1) 38%, rgba(0,212,255,1) 100%);
 }
 
 body {
@@ -35,28 +35,18 @@ header {
   grid-column: span 2;
 }
 
-input:invalid {
-  border: 2px solid red;
-}
-
-
 /* TEXT ************************************************ */
 h1,
 h2,
 h3 {
-  font-family: 'Masiku', sans-serif;
   color: var(--pink);
+  font-family: 'Masiku', sans-serif;
   text-align: center;
 }
 
 span {
   color: var(--pink);
 }
-
-button {
-  color: white;
-}
-
 
 /* SHARED WIDGET PROPERTIES **************************** */
 header,
@@ -68,10 +58,11 @@ button {
 }
 
 button {
-  border: 2px solid var(--pink);
-  filter: drop-shadow(0 0 0.75rem var(--pink));
   display: inline-block;
   vertical-align: middle;
+  color: white;
+  border: 2px solid var(--pink);
+  filter: drop-shadow(0 0 0.75rem var(--pink));
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -81,9 +72,19 @@ button {
   transition-property: transform;
 }
 
-button:hover, button:focus {
+button:hover, 
+button:focus {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+/* FORM ************************************************ */
+input:invalid {
+  border: 2px solid red;
+}
+
+input:valid {
+  border: 2px solid lightgreen;
 }
 
 /* GENERAL ********************************************* */
