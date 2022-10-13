@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://fonts.cdnfonts.com/css/masiku" rel="stylesheet" />
+    <title>Fitlit</title>
+  </head>
+  <body>
+    <header>
+      <h1>Activity Tracker</h1>
+      <p>Hello, <span class="user-first-name">USERNAME</span></p>
+      <p>Address: <span class="user-address">USERADDRESS</span></p>
+      <p>Email: <span class="user-email">USEREMAIL</span></p>
+    </header>
+    <section class="friends-section">
+      <h2>Friends List</h2>
+      <article class="friend-names"></article>
+    </section>
+    <section class="controls-section">
+      <p>Showing data for <span class="timeframe-display">TIMEFRAME</span></p>
+      <button class="update-button">
+        <span class="update-button-text">SHOW</span> Update Info Form
+      </button>
+      <form class="data-box hidden">
+        <label for="data-choice">Choose Activity Type:</label>
+        <select name="data-choices" class="data-choices">
+          <option value="hydration" selected>Water Data</option>
+          <option value="sleep">Sleep Data</option>
+          <option value="activity">Activity Data</option>
+        </select>
+        <label for="activity-date">Date:</label>
+        <input class="date-form reset-input" type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br />
+        <label for="water-intake" class="water-form">Water Intake (oz)</label>
+        <input class="water-form water-intake-input" name="water-intake" placeholder="0" type="number" min="0" required />
+        <label for="hours-slept" class="sleep-form hidden">Hours Slept (hrs)</label>
+        <input class="sleep-form hours-slept-input hidden" name="hours-slept" placeholder="0" type="number" min="0" required />
+        <label for="sleep-quality" class="sleep-form hidden">Sleep Quality (/5)</label>
+        <input class="sleep-form sleep-quality-input hidden" name="sleep-quality" placeholder="0" type="number" min="0" required />
+        <label for="number-of-steps" class="activity-form hidden">Number of Steps</label>
+        <input class="activity-form number-of-steps-input hidden" name="number-of-steps" placeholder="0" type="number" min="0" required />
+        <label for="flights-of-stairs" class="activity-form hidden">Flights of Stairs</label>
+        <input class="activity-form flights-of-stairs-input hidden" name="flights-of-stairs" placeholder="0" type="number" min="0" required />
+        <label for="mins-active" class="activity-form hidden">Minutes Active</label>
+        <input class="activity-form mins-active-input hidden" name="mins-active" placeholder="0" type="number" min="0" required />
+        <button type="submit" class="save-btn">Save</button>
+      </form>
+    </section>
+    <section class="water-section">
+      <h3>Water Intake</h3>
+      <article class="water-information">
+        <p>
+          <span class="water-date">DATE</span> : 
+          <span class="water-amount">AMOUNT</span> oz
+        </p>
+      </article>
+      <p>Average Daily Water Intake: <span class="avg-water-amount">AVG</span> oz</p>
+      <button class="water-timeframe-button">
+        Show <span class="water-timeframe-button-text">WEEKLY</span> Data
+      </button>
+    </section>
+    <section class="sleep-section">
+      <h3>Sleep</h3>
+      <article class="sleep-information">
+        <p>
+          <span class="sleep-date">DATE</span> : 
+          <span class="sleep-amount">AMOUNT</span> hrs, 
+          <span class="sleep-quality">AMT</span> / 5 Quality
+        </p>
+      </article>
+      <p>Average Daily Sleep: <span class="avg-sleep-amount">AVG</span> hrs</p>
+      <p>Average Daily Sleep Quality: <span class="avg-sleep-quality">AVG</span> / 5</p>
+      <button class="sleep-timeframe-button">
+        Show <span class="sleep-timeframe-button-text">WEEKLY</span> Data
+      </button>
+    </section>
+    <section class="steps-section">
+      <h3>Activity</h3>
+      <article class="activity-information">
+        <p>
+          <span class="step-date">DATE</span> : 
+          <span class="user-step-amount">AMOUNT</span> steps, 
+          <span class="user-stair-flights">AMOUNT</span> flights, 
+          <span class="user-active-mins">AMOUNT</span> mins active
+        </p>
+        <p>
+          Given your <span class="user-stride-length">USERSTRIDE</span> ft stride length, 
+          you walked <span class="user-step-distance">DISTANCE</span> miles today!
+        </p>
+      </article>
+      <p>
+        Average ACTIVITY TRACKER Metrics: 
+        <span class="repo-avg-steps">REPOAVGSTEPS</span> steps, 
+        <span class="repo-avg-stairs">REPOAVGFLIGHTS</span> flights, 
+        <span class="repo-avg-mins">REPOAVGMINS</span> mins active
+      </p>
+      <p>Daily Step Goal: <span class="user-step-goal">USERSTEPS</span> steps</p>
+      <p>Average ACTIVITY TRACKER Step Goal: <span class="repo-step-goal">REPOAVGSTEPS</span> steps</p>
+      <button class="activity-timeframe-button">
+        Show <span class="activity-timeframe-button-text">WEEKLY</span> Data
+      </button>
+    </section>
+    <script src="bundle.js"></script>
+  </body>
+</html>
